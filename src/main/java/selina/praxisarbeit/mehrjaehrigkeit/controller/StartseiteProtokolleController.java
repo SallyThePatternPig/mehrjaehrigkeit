@@ -60,7 +60,8 @@ public class StartseiteProtokolleController {
     }
 
     public void drawGui(JFrame frame, Long personId){
-        fillGui(personId);
+        PersonDto personDto = personService.readPersonFromId(personId);
+        fillGui(personDto);
         frame.add(gui.getStartseiteProtokollePanel());
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -68,8 +69,7 @@ public class StartseiteProtokolleController {
         this.personId = personId;
     }
 
-    private void fillGui(Long personId){
-        PersonDto personDto = personService.readPersonFromId(personId);
+    private void fillGui(PersonDto personDto){
         String guiInput = personDto.getNachname() + ", " + personDto.getVorname() + " (ID: " + personId.toString() + ")";
         gui.getAntragstellerLabel().setText(guiInput);
     }
