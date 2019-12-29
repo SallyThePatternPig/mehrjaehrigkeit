@@ -2,6 +2,9 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
+import selina.praxisarbeit.mehrjaehrigkeit.entity.PersonEntity;
+import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.StartseiteProtokolleGui;
 
 import javax.swing.*;
@@ -19,6 +22,9 @@ public class StartseiteProtokolleController {
 
     @Autowired
     private ProtokollJahrController protokollController;
+
+    @Autowired
+    private PersonService personService;
 
     private JFrame myFrame;
 
@@ -54,10 +60,18 @@ public class StartseiteProtokolleController {
     }
 
     public void drawGui(JFrame frame, Long personId){
+        fillGui(personId);
         frame.add(gui.getStartseiteProtokollePanel());
         frame.pack();
         frame.setLocationRelativeTo(null);
         this.myFrame = frame;
         this.personId = personId;
     }
+
+    private void fillGui(Long personId){
+        PersonDto personDto = personService.readPersonFromId(personId);
+        String guiInput = personDto.getNachname() + ", " + personDto.getVorname() + " (ID: " + personId.toString() + ")";
+        gui.getAntragstellerLabel().setText(guiInput);
+    }
 }
+

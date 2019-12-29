@@ -80,6 +80,8 @@ public class AuswahlBestehenderProtkolleController {
 
         tableModel = new DefaultTableModel();
 
+        gui.getProtokollTable().setDefaultEditor(Object.class, null);
+
         Object[] columnTopic = new Object[]{"ID", "Erfassungsjahr", "Mindestens 100 qm Grünfläche", "Keine Nutzung von Pflanzenschutzmitteln"};
 
         tableModel.setColumnIdentifiers(columnTopic);
