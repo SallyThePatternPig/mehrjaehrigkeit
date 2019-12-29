@@ -23,6 +23,9 @@ public class PersonService {
     @Autowired
     private PersonEntityValidator personEntityValidator;
 
+    @Autowired
+    private ProtokollService protokollService;
+
     public List<PersonDto> readAllPersons(){
        TypedQuery<PersonEntity> p = entityManager.createQuery("select p from PersonEntity p", PersonEntity.class);
        List<PersonEntity> resultEntity = p.getResultList();
@@ -44,5 +47,16 @@ public class PersonService {
     public PersonDto readPersonFromId (Long personId){
         PersonEntity personEntity = entityManager.find(PersonEntity.class, personId);
         return new ConverterPerson().convertToDto(personEntity);
+    }
+
+    public void removePerson(Long personId) {
+        PersonEntity personEntity = entityManager.find(PersonEntity.class, personId);
+        entityManager.remove(personEntity);
+    }
+
+    public void removePersonMitProtokolle (Long personId){
+        PersonEntity personEntity = entityManager.find(PersonEntity.class, personId);
+        protokollService.removeAllProtokolle(personEntity);
+        removePerson(personId);
     }
 }

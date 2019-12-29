@@ -2,59 +2,59 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import selina.praxisarbeit.mehrjaehrigkeit.view.StartseiteAntraegeGui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.StartseiteProtokolleGui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 @Controller
-public class StartseiteAntraegeController {
+public class StartseiteProtokolleController {
 
     @Autowired
     private StartseiteAntragstellerController startseiteAntragstellerController;
 
     @Autowired
-    private AuswahlBestehenderAntraegeController auswahlAntraegeController;
+    private AuswahlBestehenderProtkolleController auswahlProtokolleController;
 
     @Autowired
-    private AntragJahrController antragController;
+    private ProtokollJahrController protokollController;
 
     private JFrame myFrame;
 
     private Long personId;
 
-    private StartseiteAntraegeGui gui = new StartseiteAntraegeGui();
+    private StartseiteProtokolleGui gui = new StartseiteProtokolleGui();
 
-    public StartseiteAntraegeController(){
+    public StartseiteProtokolleController(){
 
         gui.getAbbrechenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myFrame.remove(gui.getStartseiteAntraegePanel());
+                myFrame.remove(gui.getStartseiteProtokollePanel());
                 startseiteAntragstellerController.drawGui(myFrame);
             }
         });
 
-        gui.getBestehendenAntragBearbeitenButton().addActionListener(new ActionListener() {
+        gui.getBestehendenProtokollBearbeitenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myFrame.remove(gui.getStartseiteAntraegePanel());
-                auswahlAntraegeController.drawGui(myFrame, personId);
+                myFrame.remove(gui.getStartseiteProtokollePanel());
+                auswahlProtokolleController.drawGui(myFrame, personId);
             }
         });
 
-        gui.getNeuenAntragErstellenButton().addActionListener(new ActionListener() {
+        gui.getNeuenProtokollErstellenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myFrame.remove(gui.getStartseiteAntraegePanel());
-                antragController.drawGui(myFrame, personId, null);
+                myFrame.remove(gui.getStartseiteProtokollePanel());
+                protokollController.drawGui(myFrame, personId, null);
             }
         });
     }
 
     public void drawGui(JFrame frame, Long personId){
-        frame.add(gui.getStartseiteAntraegePanel());
+        frame.add(gui.getStartseiteProtokollePanel());
         frame.pack();
         frame.setLocationRelativeTo(null);
         this.myFrame = frame;

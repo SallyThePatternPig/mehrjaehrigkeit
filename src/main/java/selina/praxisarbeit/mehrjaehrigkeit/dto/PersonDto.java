@@ -20,5 +20,5 @@ public class PersonDto {
 
     private GeschlechtEnum geschlecht;
 
-    private Set<AntragDto> antraege;
+    private Set<ProtokollDto> protokolle;
 }

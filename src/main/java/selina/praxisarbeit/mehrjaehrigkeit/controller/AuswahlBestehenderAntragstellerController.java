@@ -2,19 +2,19 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
-import selina.praxisarbeit.mehrjaehrigkeit.view.AuwahlBestehenderAntragstellerGui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderAntragstellerGui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.*;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.deleteMessage;
 
 @Controller
 public class AuswahlBestehenderAntragstellerController {
@@ -26,7 +26,7 @@ public class AuswahlBestehenderAntragstellerController {
     private AntragstellerJahr1Controller antragstellerController;
 
     @Autowired
-    private StartseiteAntraegeController startseiteAntraegeCotroller;
+    private StartseiteProtokolleController startseiteProtokolleCotroller;
 
     @Autowired
     private PersonService personService;
@@ -37,7 +37,7 @@ public class AuswahlBestehenderAntragstellerController {
 
     private Long personId;
 
-    private AuwahlBestehenderAntragstellerGui gui = new AuwahlBestehenderAntragstellerGui();
+    private AuswahlBestehenderAntragstellerGui gui = new AuswahlBestehenderAntragstellerGui();
 
     public AuswahlBestehenderAntragstellerController(){
 
@@ -49,11 +49,29 @@ public class AuswahlBestehenderAntragstellerController {
             }
         });
 
+        gui.getLoeschenButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(isRowSelected(gui.getAntragstellerTable())) {
+                    personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
+                    PersonDto personDto = personService.readPersonFromId(personId);
+                    if(personDto.getProtokolle().size() == 0){
+                        personService.removePerson(personId);
+                    } else{
+                        if(showDeleteOptionPane()){
+                            personService.removePersonMitProtokolle(personId);
+                        }
+                    }
+                    myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
+                    drawGui(myFrame);
+                }
+            }
+        });
         gui.getBearbeitenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getAntragstellerTable())) {
-                    Long personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
+                    personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
                     myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
                     antragstellerController.drawGui(myFrame, personId);
                 }
@@ -64,9 +82,9 @@ public class AuswahlBestehenderAntragstellerController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getAntragstellerTable())) {
-                    Long personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
+                    personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
                     myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
-                    startseiteAntraegeCotroller.drawGui(myFrame, personId);
+                    startseiteProtokolleCotroller.drawGui(myFrame, personId);
                 }
             }
         });
@@ -96,5 +114,11 @@ public class AuswahlBestehenderAntragstellerController {
         }
 
         gui.getAntragstellerTable().setModel(tableModel);
+    }
+
+    private boolean showDeleteOptionPane(){
+        int result = JOptionPane.showConfirmDialog((Component) null, deleteMessage,
+                "Achtung!", JOptionPane.OK_CANCEL_OPTION);
+        return result == JOptionPane.OK_OPTION;
     }
 }

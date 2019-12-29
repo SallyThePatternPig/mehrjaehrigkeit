@@ -13,8 +13,8 @@ public class ConverterPerson {
         pDto.setId(pE.getId());
         pDto.setVorname(pE.getVorname());
         pDto.setNachname(pE.getNachname());
-        ConverterAntrag cA = new ConverterAntrag();
-        pDto.setAntraege(cA.convertToDto(pE.getAntraege()));
+        ConverterProtokoll cA = new ConverterProtokoll();
+        pDto.setProtokolle(cA.convertToDto(pE.getProtokolle()));
         pDto.setGeburtstdatum(pE.getGeburtstdatum());
         pDto.setGeschlecht(pE.getGeschlecht());
         return pDto;

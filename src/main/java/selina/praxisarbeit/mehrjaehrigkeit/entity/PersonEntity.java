@@ -29,5 +29,5 @@ public class PersonEntity {
     private GeschlechtEnum geschlecht;
 
     @OneToMany(mappedBy = "antragsteller")
-    private Set<AntragEntity> antraege;
+    private Set<ProtokollEntity> protokolle;
 }

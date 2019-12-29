@@ -9,9 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 
 @Getter
-public class AntragJahr1Gui {
-    private JPanel antragJahr1Panel;
-    private JLabel antragJahr1Label;
+public class ProtokollJahr1Gui {
+    private JPanel protokollJahr1Panel;
+    private JLabel protokollJahr1Label;
     private JPanel fragePanel;
     private JPanel aumPanel;
     private JLabel tiereFrageJahr1Label;
@@ -39,7 +39,7 @@ public class AntragJahr1Gui {
     private JButton abbrechenButton;
     private JLabel bearbeitenErstellenLabel;
     private JPanel ueberschriftPanel;
-    private JPanel buttonAntraegePanel;
+    private JPanel buttonProtokollePanel;
     private JTextField anbauflaecheTextField;
     private JTextField gesamtFlaecheTextField;
     private ButtonGroup tiereVorhandenButtonGroup;
@@ -59,23 +59,23 @@ public class AntragJahr1Gui {
      * @noinspection ALL
      */
     private void $$$setupUI$$$() {
-        antragJahr1Panel = new JPanel();
-        antragJahr1Panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
+        protokollJahr1Panel = new JPanel();
+        protokollJahr1Panel.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
         ueberschriftPanel = new JPanel();
         ueberschriftPanel.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
-        antragJahr1Panel.add(ueberschriftPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        protokollJahr1Panel.add(ueberschriftPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ueberschriftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
-        antragJahr1Label = new JLabel();
-        Font antragJahr1LabelFont = this.$$$getFont$$$(null, Font.BOLD, 18, antragJahr1Label.getFont());
-        if (antragJahr1LabelFont != null) antragJahr1Label.setFont(antragJahr1LabelFont);
-        antragJahr1Label.setText("Antrag Jahr 1");
-        ueberschriftPanel.add(antragJahr1Label, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        protokollJahr1Label = new JLabel();
+        Font protokollJahr1LabelFont = this.$$$getFont$$$(null, Font.BOLD, 18, protokollJahr1Label.getFont());
+        if (protokollJahr1LabelFont != null) protokollJahr1Label.setFont(protokollJahr1LabelFont);
+        protokollJahr1Label.setText("Protokoll Jahr 1");
+        ueberschriftPanel.add(protokollJahr1Label, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bearbeitenErstellenLabel = new JLabel();
-        bearbeitenErstellenLabel.setText("[AntragID]");
+        bearbeitenErstellenLabel.setText("[ProtokollID]");
         ueberschriftPanel.add(bearbeitenErstellenLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         fragePanel = new JPanel();
         fragePanel.setLayout(new GridLayoutManager(9, 7, new Insets(10, 10, 10, 10), -1, -1));
-        antragJahr1Panel.add(fragePanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        protokollJahr1Panel.add(fragePanel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         tiereFrageJahr1Label = new JLabel();
         Font tiereFrageJahr1LabelFont = this.$$$getFont$$$(null, Font.PLAIN, -1, tiereFrageJahr1Label.getFont());
         if (tiereFrageJahr1LabelFont != null) tiereFrageJahr1Label.setFont(tiereFrageJahr1LabelFont);
@@ -150,7 +150,7 @@ public class AntragJahr1Gui {
         fragePanel.add(spacer1, new GridConstraints(6, 6, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         aumPanel = new JPanel();
         aumPanel.setLayout(new GridLayoutManager(3, 1, new Insets(10, 10, 10, 10), -1, -1));
-        antragJahr1Panel.add(aumPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        protokollJahr1Panel.add(aumPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         aumJahr1TopicLabel = new JLabel();
         Font aumJahr1TopicLabelFont = this.$$$getFont$$$(null, Font.BOLD, 14, aumJahr1TopicLabel.getFont());
         if (aumJahr1TopicLabelFont != null) aumJahr1TopicLabel.setFont(aumJahr1TopicLabelFont);
@@ -164,7 +164,7 @@ public class AntragJahr1Gui {
         aumPanel.add(min100QmGruenflaecheCheckBox, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
         antragstellerPanel = new JPanel();
         antragstellerPanel.setLayout(new GridLayoutManager(6, 3, new Insets(10, 10, 10, 10), -1, -1));
-        antragJahr1Panel.add(antragstellerPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        protokollJahr1Panel.add(antragstellerPanel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label7 = new JLabel();
         label7.setText("ID:");
         antragstellerPanel.add(label7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -212,20 +212,20 @@ public class AntragJahr1Gui {
         antragstellerPanel.add(geburtsdatumLabel, new GridConstraints(5, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         antragstellerPanel.add(spacer2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        buttonAntraegePanel = new JPanel();
-        buttonAntraegePanel.setLayout(new GridLayoutManager(1, 3, new Insets(10, 10, 10, 10), -1, -1));
-        antragJahr1Panel.add(buttonAntraegePanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        buttonAntraegePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
+        buttonProtokollePanel = new JPanel();
+        buttonProtokollePanel.setLayout(new GridLayoutManager(1, 3, new Insets(10, 10, 10, 10), -1, -1));
+        protokollJahr1Panel.add(buttonProtokollePanel, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        buttonProtokollePanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
         speichernButton = new JButton();
         speichernButton.setText("Speichern");
-        buttonAntraegePanel.add(speichernButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 3, false));
+        buttonProtokollePanel.add(speichernButton, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 3, false));
         abbrechenButton = new JButton();
         abbrechenButton.setText("Abbrechen");
-        buttonAntraegePanel.add(abbrechenButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        buttonProtokollePanel.add(abbrechenButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
-        buttonAntraegePanel.add(spacer3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        buttonProtokollePanel.add(spacer3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final Spacer spacer4 = new Spacer();
-        antragJahr1Panel.add(spacer4, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        protokollJahr1Panel.add(spacer4, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         tiereVorhandenButtonGroup = new ButtonGroup();
         tiereVorhandenButtonGroup.add(tiereVorhandenNeinRadioButton);
         tiereVorhandenButtonGroup.add(tiereVorhandenJaRadioButton);
@@ -254,7 +254,7 @@ public class AntragJahr1Gui {
      * @noinspection ALL
      */
     public JComponent $$$getRootComponent$$$() {
-        return antragJahr1Panel;
+        return protokollJahr1Panel;
     }
 
     private void createUIComponents() {

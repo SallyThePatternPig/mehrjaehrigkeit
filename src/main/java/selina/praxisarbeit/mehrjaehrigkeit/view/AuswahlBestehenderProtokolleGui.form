@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="selina.praxisarbeit.mehrjaehrigkeit.view.AuwahlBestehenderAntragstellerGui">
-  <grid id="27dc6" binding="auswahlBestehenderAntragstellerPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui">
+  <grid id="27dc6" binding="AuswahlBestehenderProtokollePanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="4c18a" binding="ueberschriftPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="85d3" binding="ueberschriftPanel" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -16,36 +16,36 @@
         <properties/>
         <border type="line"/>
         <children>
-          <component id="7d57c" class="javax.swing.JLabel">
+          <component id="e522d" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font size="18" style="1"/>
-              <text value="Bestehende Antragsteller"/>
+              <text value="Bestehende Protokolle"/>
             </properties>
           </component>
-          <component id="7faab" class="javax.swing.JLabel">
+          <component id="fceb1" class="javax.swing.JLabel">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="&lt;html&gt;Bitte wählen Sie einen Antragsteller aus und klicken Sie auf &quot;Auswählen&quot; &lt;br&gt; oder &quot;Bearbeiten&quot;:"/>
+              <text value="Bitte wählen Sie einen Protokoll aus und klicken Sie auf &quot;Bearbeiten&quot;:"/>
             </properties>
           </component>
-          <vspacer id="1c41b">
+          <vspacer id="cb56f">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>
       </grid>
-      <vspacer id="432c1">
+      <vspacer id="184a7">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <grid id="18d78" binding="buttonBestehendeAntragstellerPanel" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="c7899" binding="buttonBestehendeProtokollePanel" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -53,7 +53,7 @@
         <properties/>
         <border type="line"/>
         <children>
-          <component id="4d34a" class="javax.swing.JButton" binding="zurueckButton">
+          <component id="d4c4e" class="javax.swing.JButton" binding="zurueckButton">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -61,22 +61,22 @@
               <text value="Zurück"/>
             </properties>
           </component>
-          <hspacer id="86eb8">
+          <hspacer id="c5aac">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <component id="76183" class="javax.swing.JButton" binding="auswaehlenButton">
-            <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="3" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Auswählen"/>
-            </properties>
-          </component>
-          <component id="29ce2" class="javax.swing.JButton" binding="bearbeitenButton" default-binding="true">
+          <component id="b6741" class="javax.swing.JButton" binding="loeschenButton">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="3" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Löschen"/>
+            </properties>
+          </component>
+          <component id="e9d75" class="javax.swing.JButton" binding="bearbeitenButton">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="3" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Bearbeiten"/>
@@ -84,14 +84,14 @@
           </component>
         </children>
       </grid>
-      <scrollpane id="cb8a8" binding="antragstellerScrollPane">
+      <scrollpane id="12e6" binding="protokollScrollPane">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
         <children>
-          <component id="52c42" class="javax.swing.JTable" binding="antragstellerTable">
+          <component id="cccaa" class="javax.swing.JTable" binding="protokollTable">
             <constraints/>
             <properties>
               <font style="0"/>
