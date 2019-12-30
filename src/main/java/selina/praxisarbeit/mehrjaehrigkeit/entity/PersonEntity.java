@@ -2,7 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import selina.praxisarbeit.mehrjaehrigkeit.dto.GeschlechtEnum;
+import selina.praxisarbeit.mehrjaehrigkeit.common.GeschlechtEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

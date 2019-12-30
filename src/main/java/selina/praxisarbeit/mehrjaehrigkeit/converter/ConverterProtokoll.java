@@ -21,8 +21,8 @@ public class ConverterProtokoll {
         protokollDto.setNichts(protokollEntity.isNichts());
         protokollDto.setAnbauflaeche(protokollEntity.getAnbauflaeche());
         protokollDto.setGesamtflaeche(protokollEntity.getGesamtflaeche());
-        protokollDto.setKeinePflanzenschutzmittel(protokollEntity.isKeinePflanzenschutzmittel());
-        protokollDto.setMin100qmGruenflaeche(protokollEntity.isMin100qmGruenflaeche());
+        protokollDto.setKeinePflanzenschutzmittel(protokollEntity.getKeinePflanzenschutzmittel());
+        protokollDto.setMin100qmGruenflaeche(protokollEntity.getMin100qmGruenflaeche());
         return protokollDto;
     }
 
@@ -53,8 +53,8 @@ public class ConverterProtokoll {
         protokollEntity.setNichts(protokollDto.isNichts());
         protokollEntity.setAnbauflaeche(protokollDto.getAnbauflaeche());
         protokollEntity.setGesamtflaeche(protokollDto.getGesamtflaeche());
-        protokollEntity.setKeinePflanzenschutzmittel(protokollDto.isKeinePflanzenschutzmittel());
-        protokollEntity.setMin100qmGruenflaeche(protokollDto.isMin100qmGruenflaeche());
+        protokollEntity.setKeinePflanzenschutzmittel(protokollDto.getKeinePflanzenschutzmittel());
+        protokollEntity.setMin100qmGruenflaeche(protokollDto.getMin100qmGruenflaeche());
         return protokollEntity;
     }
 }

@@ -1,4 +1,4 @@
-package selina.praxisarbeit.mehrjaehrigkeit.dto;
+package selina.praxisarbeit.mehrjaehrigkeit.common;
 
 public enum GeschlechtEnum {
     WEIBLICH,

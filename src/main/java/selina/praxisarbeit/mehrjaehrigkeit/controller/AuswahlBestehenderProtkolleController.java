@@ -89,7 +89,7 @@ public class AuswahlBestehenderProtkolleController {
         Set<ProtokollDto> protokollDtoSet = protokollService.readAllProtokolle(personId);
 
         for(ProtokollDto protokollDto : protokollDtoSet){
-            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.isMin100qmGruenflaeche(), protokollDto.isKeinePflanzenschutzmittel()};
+            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.getMin100qmGruenflaeche(), protokollDto.getKeinePflanzenschutzmittel()};
             tableModel.addRow(rowInput);
         }
 

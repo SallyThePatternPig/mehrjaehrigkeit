@@ -2,7 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import selina.praxisarbeit.mehrjaehrigkeit.dto.GeschlechtEnum;
+import selina.praxisarbeit.mehrjaehrigkeit.common.GeschlechtEnum;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
 import selina.praxisarbeit.mehrjaehrigkeit.validation.ValidationException;

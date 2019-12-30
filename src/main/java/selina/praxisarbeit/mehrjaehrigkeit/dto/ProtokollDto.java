@@ -2,6 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 import selina.praxisarbeit.mehrjaehrigkeit.entity.PersonEntity;
 
 import javax.persistence.Id;
@@ -24,6 +25,6 @@ public class ProtokollDto {
     private boolean nichts;
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
-    private boolean keinePflanzenschutzmittel;
-    private boolean min100qmGruenflaeche;
+    private AumBeantragungEnum keinePflanzenschutzmittel;
+    private AumBeantragungEnum min100qmGruenflaeche;
 }
