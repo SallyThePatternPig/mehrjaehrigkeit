@@ -2,6 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher.ProtokollJahresSwitcher;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui;
@@ -23,6 +24,9 @@ public class AuswahlBestehenderProtkolleController {
 
     @Autowired
     private ProtokollJahrController protokollJahrController;
+
+    @Autowired
+    private ProtokollJahresSwitcher protokollJahresSwitcher;
 
     @Autowired
     private ProtokollService protokollService;
@@ -65,6 +69,15 @@ public class AuswahlBestehenderProtkolleController {
                 }
             }
         });
+
+        gui.getAnzeigenButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(isRowSelected(gui.getProtokollTable())){
+
+                }
+            }
+        });
     }
 
     public void drawGui(JFrame frame, Long personId){
@@ -82,14 +95,16 @@ public class AuswahlBestehenderProtkolleController {
 
         gui.getProtokollTable().setDefaultEditor(Object.class, null);
 
-        Object[] columnTopic = new Object[]{"ID", "Erfassungsjahr", "Mindestens 100 qm Grünfläche", "Keine Nutzung von Pflanzenschutzmitteln"};
+        Object[] columnTopic = new Object[]{"ID", "Erfassungsjahr", "Mindestens 100 qm Grünfläche \n beantragbar: ab 2019",
+                "Feldhamster \n beantragbar: ab 2020","Keine Nutzung von Pflanzenschutzmitteln \n beantragbar: in 2019" };
 
         tableModel.setColumnIdentifiers(columnTopic);
 
         Set<ProtokollDto> protokollDtoSet = protokollService.readAllProtokolle(personId);
 
         for(ProtokollDto protokollDto : protokollDtoSet){
-            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.isMin100qmGruenflaeche(), protokollDto.isKeinePflanzenschutzmittel()};
+            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.isMin100qmGruenflaeche(),
+                    protokollDto.isFeldhamster(), protokollDto.isKeinePflanzenschutzmittel()};
             tableModel.addRow(rowInput);
         }
 

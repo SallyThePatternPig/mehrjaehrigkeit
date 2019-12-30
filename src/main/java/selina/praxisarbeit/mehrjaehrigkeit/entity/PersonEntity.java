@@ -2,7 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import selina.praxisarbeit.mehrjaehrigkeit.dto.GeschlechtEnum;
+import selina.praxisarbeit.mehrjaehrigkeit.common.GeschlechtEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,9 +24,13 @@ public class PersonEntity {
 
     private String vorname;
 
+    //wird benötigt für Jahr 2019
     private Date geburtstdatum;
 
     private GeschlechtEnum geschlecht;
+
+    //wird ab 2020 benötigt
+    private String standort;
 
     @OneToMany(mappedBy = "antragsteller")
     private Set<ProtokollEntity> protokolle;

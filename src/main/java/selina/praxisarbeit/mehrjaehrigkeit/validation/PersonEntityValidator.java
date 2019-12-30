@@ -19,8 +19,8 @@ public class PersonEntityValidator {
         } else if (personEntity.getGeschlecht() == null){
             throw new ValidationException("Es muss ein Geschlecht angegeben werden.");
 
-        } else if (personEntity.getGeburtstdatum() == null){
-            throw new ValidationException("Es muss ein Geburtsdatum angegeben werden.");
+        } else if (personEntity.getStandort() == null){
+            throw new ValidationException("Es muss ein Standort angegeben werden.");
         }
     }
 

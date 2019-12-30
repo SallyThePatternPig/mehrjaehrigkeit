@@ -16,8 +16,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.*;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.defaultZahl;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahr;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
 
 @Controller
 public class ProtokollJahrController {
@@ -93,7 +92,9 @@ public class ProtokollJahrController {
         } else if (gui.getTiereVorhandenNeinRadioButton().isSelected()) {
             protokollDto.setTiereVorhanden(Boolean.FALSE);
         }
-        protokollDto.setErfassungsjahr(erfassungsjahr);
+        if (protokollDto.getErfassungsjahr() == 0) {
+            protokollDto.setErfassungsjahr(getAktuellesJahr());
+        }
         protokollDto.setTierAnzahl((Integer) gui.getTieranzahlSpinner().getValue());
         protokollDto.setWeideflaeche(parseBigDecimal(gui.getWeideflaecheTextField().getText()));
         protokollDto.setGetreide(gui.getGetreideCheckBox().isSelected());
@@ -112,11 +113,10 @@ public class ProtokollJahrController {
         } else {
             gui.getBearbeitenErstellenLabel().setText("Protokoll (ID: " + protokollDto.getId() + ") bearbeiten");
         }
-        gui.getIdLabel().setText(personDto.getId().toString());
-        gui.getNachnameLabel().setText(personDto.getNachname());
-        gui.getVornameLabel().setText(personDto.getVorname());
-        gui.getGeschlechtLabel().setText(personDto.getGeschlecht().toString());
-        gui.getGeburtsdatumLabel().setText(formatDate(personDto.getGeburtstdatum()));
+        gui.getPersonIdDtoFillLabel().setText(personDto.getId().toString());
+        gui.getNachnameDtoFillLabel().setText(personDto.getNachname());
+        gui.getVornameDtoFillLabel().setText(personDto.getVorname());
+        gui.getGeschlechtDtoFillLabel().setText(personDto.getGeschlecht().toString());
 
         if (protokollDto.getTiereVorhanden() == Boolean.TRUE) {
             gui.getTiereVorhandenJaRadioButton().setSelected(true);
@@ -128,10 +128,10 @@ public class ProtokollJahrController {
         gui.getGetreideCheckBox().setSelected(protokollDto.isGetreide());
         gui.getBluehpflanzenCheckBox().setSelected(protokollDto.isBluehpflanzen());
         gui.getAnderesCheckBox().setSelected(protokollDto.isAnderes());
-        gui.getNichtsCheckBox().setSelected(protokollDto.isNichts());
+
         gui.getAnbauflaecheTextField().setText(formatBigDecimal(protokollDto.getAnbauflaeche()));
         gui.getGesamtFlaecheTextField().setText(formatBigDecimal(protokollDto.getGesamtflaeche()));
-        gui.getKeineNutzungPflanzenschutzmittelnCheckBox().setSelected(protokollDto.isKeinePflanzenschutzmittel());
+
         gui.getMin100QmGruenflaecheCheckBox().setSelected(protokollDto.isMin100qmGruenflaeche());
     }
 }

@@ -24,14 +24,21 @@ public class ProtokollEntity {
     private Boolean tiereVorhanden;
     private Integer tierAnzahl;
     private BigDecimal weideflaeche;
+
     private boolean getreide;
     private boolean bluehpflanzen;
     private boolean anderes;
-    private boolean nichts;
+
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
+    //nur 2019:
+    private boolean nichts;
     private boolean keinePflanzenschutzmittel;
+    //ab 2019:
     private boolean min100qmGruenflaeche;
+    //ab 2020:
+    private Boolean anbauflaecheVorhanden;
+    private boolean feldhamster;
 
     @ManyToOne
     private PersonEntity antragsteller;

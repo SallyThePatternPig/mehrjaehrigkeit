@@ -18,12 +18,22 @@ public class ProtokollDto {
     private Boolean tiereVorhanden;
     private Integer tierAnzahl;
     private BigDecimal weideflaeche;
+
     private boolean getreide;
     private boolean bluehpflanzen;
     private boolean anderes;
-    private boolean nichts;
+
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
+    //nur 2019:
+    private boolean nichts;
     private boolean keinePflanzenschutzmittel;
+    private Integer keinePflanzenschutzmittelAbJahr;
+    //ab 2019:
     private boolean min100qmGruenflaeche;
+    private Integer min100qmGruenflaecheAbJahr;
+    //ab 2020:
+    private Boolean anbauflaecheVorhanden;
+    private boolean feldhamster;
+    private Integer feldhamsterAbJahr;
 }
