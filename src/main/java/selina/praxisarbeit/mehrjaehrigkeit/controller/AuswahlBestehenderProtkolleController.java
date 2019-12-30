@@ -2,6 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher.ProtokollJahresSwitcher;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui;
@@ -102,8 +103,8 @@ public class AuswahlBestehenderProtkolleController {
         Set<ProtokollDto> protokollDtoSet = protokollService.readAllProtokolle(personId);
 
         for(ProtokollDto protokollDto : protokollDtoSet){
-            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.isMin100qmGruenflaeche(),
-                    protokollDto.isFeldhamster(), protokollDto.isKeinePflanzenschutzmittel()};
+            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.getMin100qmGruenflaeche(),
+                    protokollDto.isFeldhamster(), protokollDto.getKeinePflanzenschutzmittel()};
             tableModel.addRow(rowInput);
         }
 

@@ -28,15 +28,14 @@ public class ProtokollDto {
     private BigDecimal gesamtflaeche;
     //nur 2019:
     private boolean nichts;
-    private boolean keinePflanzenschutzmittel;
+    private AumBeantragungEnum keinePflanzenschutzmittel;
     private Integer keinePflanzenschutzmittelAbJahr;
     //ab 2019:
-    private boolean min100qmGruenflaeche;
     private Integer min100qmGruenflaecheAbJahr;
+    private AumBeantragungEnum min100qmGruenflaeche;
     //ab 2020:
     private Boolean anbauflaecheVorhanden;
     private boolean feldhamster;
     private Integer feldhamsterAbJahr;
-    private AumBeantragungEnum keinePflanzenschutzmittel;
-    private AumBeantragungEnum min100qmGruenflaeche;
+
 }

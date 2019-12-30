@@ -32,13 +32,12 @@ public class ProtokollEntity {
 
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
-    private AumBeantragungEnum keinePflanzenschutzmittel;
-    private AumBeantragungEnum min100qmGruenflaeche;
+
     //nur 2019:
     private boolean nichts;
-    private boolean keinePflanzenschutzmittel;
+    private AumBeantragungEnum keinePflanzenschutzmittel;
     //ab 2019:
-    private boolean min100qmGruenflaeche;
+    private AumBeantragungEnum min100qmGruenflaeche;
     //ab 2020:
     private Boolean anbauflaecheVorhanden;
     private boolean feldhamster;

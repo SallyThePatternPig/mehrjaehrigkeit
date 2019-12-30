@@ -152,7 +152,5 @@ public class ProtokollJahrController {
             aumEnum = AumBeantragungEnum.NICHT_BEANTRAGT;
         }
         return aumEnum;
-
-        gui.getMin100QmGruenflaecheCheckBox().setSelected(protokollDto.isMin100qmGruenflaeche());
     }
 }
