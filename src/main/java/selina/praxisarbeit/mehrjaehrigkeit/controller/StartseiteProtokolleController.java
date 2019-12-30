@@ -60,13 +60,13 @@ public class StartseiteProtokolleController {
     }
 
     public void drawGui(JFrame frame, Long personId){
+        this.personId = personId;
         PersonDto personDto = personService.readPersonFromId(personId);
         fillGui(personDto);
         frame.add(gui.getStartseiteProtokollePanel());
         frame.pack();
         frame.setLocationRelativeTo(null);
         this.myFrame = frame;
-        this.personId = personId;
     }
 
     private void fillGui(PersonDto personDto){

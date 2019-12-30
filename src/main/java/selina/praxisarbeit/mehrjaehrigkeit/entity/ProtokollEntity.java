@@ -3,6 +3,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,6 +32,8 @@ public class ProtokollEntity {
 
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
+    private AumBeantragungEnum keinePflanzenschutzmittel;
+    private AumBeantragungEnum min100qmGruenflaeche;
     //nur 2019:
     private boolean nichts;
     private boolean keinePflanzenschutzmittel;

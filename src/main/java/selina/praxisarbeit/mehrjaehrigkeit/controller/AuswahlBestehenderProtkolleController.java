@@ -2,7 +2,6 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher.ProtokollJahresSwitcher;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui;

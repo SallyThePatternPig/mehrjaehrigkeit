@@ -2,6 +2,7 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
@@ -103,8 +104,8 @@ public class ProtokollJahrController {
         protokollDto.setNichts(gui.getNichtsCheckBox().isSelected());
         protokollDto.setAnbauflaeche(parseBigDecimal(gui.getAnbauflaecheTextField().getText()));
         protokollDto.setGesamtflaeche(parseBigDecimal(gui.getGesamtFlaecheTextField().getText()));
-        protokollDto.setKeinePflanzenschutzmittel(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected());
-        protokollDto.setMin100qmGruenflaeche(gui.getMin100QmGruenflaecheCheckBox().isSelected());
+        protokollDto.setKeinePflanzenschutzmittel(booleanToAumEnum(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected()));
+        protokollDto.setMin100qmGruenflaeche(booleanToAumEnum(gui.getMin100QmGruenflaecheCheckBox().isSelected()));
     }
 
     private void fillProtokollGUI() {
@@ -131,6 +132,26 @@ public class ProtokollJahrController {
 
         gui.getAnbauflaecheTextField().setText(formatBigDecimal(protokollDto.getAnbauflaeche()));
         gui.getGesamtFlaecheTextField().setText(formatBigDecimal(protokollDto.getGesamtflaeche()));
+        gui.getKeineNutzungPflanzenschutzmittelnCheckBox().setSelected(aumEnumToboolean(protokollDto.getKeinePflanzenschutzmittel()));
+        gui.getMin100QmGruenflaecheCheckBox().setSelected(aumEnumToboolean(protokollDto.getMin100qmGruenflaeche()));
+    }
+
+    private boolean aumEnumToboolean(AumBeantragungEnum aumEnum){
+        if(aumEnum == null){
+            return false;
+        } else{
+            return aumEnum.equals(AumBeantragungEnum.NEU_BEANTRAGT);
+        }
+    }
+
+    private AumBeantragungEnum booleanToAumEnum(boolean checkboxWert){
+        AumBeantragungEnum aumEnum;
+        if(checkboxWert){
+            aumEnum = AumBeantragungEnum.NEU_BEANTRAGT;
+        } else{
+            aumEnum = AumBeantragungEnum.NICHT_BEANTRAGT;
+        }
+        return aumEnum;
 
         gui.getMin100QmGruenflaecheCheckBox().setSelected(protokollDto.isMin100qmGruenflaeche());
     }

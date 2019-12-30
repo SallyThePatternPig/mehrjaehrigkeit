@@ -1,6 +1,7 @@
 package selina.praxisarbeit.mehrjaehrigkeit.validation;
 
 import org.springframework.stereotype.Service;
+import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 import selina.praxisarbeit.mehrjaehrigkeit.entity.ProtokollEntity;
 
 
@@ -63,7 +64,8 @@ public class ProtokollEntityValidator {
             throw new ValidationException("Die Gesamtfläche muss mindestens " + korrekteGesamtflaeche + " betragen.");
         }
 
-        if (protokollEntity.isMin100qmGruenflaeche() && gesamtflaeche < noetigeAUMGesamtflaeche){
+        if ((protokollEntity.getMin100qmGruenflaeche().equals(AumBeantragungEnum.NEU_BEANTRAGT) ||
+                protokollEntity.getMin100qmGruenflaeche().equals(AumBeantragungEnum.LAEUFT)) && gesamtflaeche < noetigeAUMGesamtflaeche){
             throw new ValidationException("Um die AUM zu beantragen müssen mindestens 100 qm ungenutzte Fläche existieren." +
                     "Die Quadratmeterzahl muss also mindestens " + noetigeAUMGesamtflaeche + " betragen.");
         }
