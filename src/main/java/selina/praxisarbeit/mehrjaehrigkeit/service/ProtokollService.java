@@ -10,8 +10,11 @@ import selina.praxisarbeit.mehrjaehrigkeit.validation.ProtokollEntityValidator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.Set;
+
+import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
 
 @Service
 @Transactional
@@ -58,5 +61,13 @@ public class ProtokollService {
         for(ProtokollEntity protokollEntity: protokollEntitySet) {
            entityManager.remove(protokollEntity);
         }
+    }
+
+    public boolean isKeinProtokollImJahr(Long personId){
+        TypedQuery<ProtokollEntity> query = entityManager.createQuery("select p from ProtokollEntity p where " +
+                "p.erfassungsjahr = :jahr and p.antragsteller.id = :personid", ProtokollEntity.class);
+        query.setParameter("jahr", getAktuellesJahr());
+        query.setParameter("personid", personId);
+        return query.getResultList().size() == 0;
     }
 }

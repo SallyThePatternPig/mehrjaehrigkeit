@@ -13,7 +13,7 @@ public class StartseiteProtokolleGui {
     private JPanel startseiteProtokollePanel;
     private JPanel antragstellerPanel;
     private JButton bestehendenProtokollBearbeitenButton;
-    private JButton neuenProtokollErstellenButton;
+    private JButton neuesProtokollErstellenButton;
     private JLabel antragstellerLabel;
     private JLabel protokollAuswahlLabel;
     private JButton abbrechenButton;
@@ -56,9 +56,9 @@ public class StartseiteProtokolleGui {
         startseiteProtokollePanel.add(bestehendenProtokollBearbeitenButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
         startseiteProtokollePanel.add(spacer3, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        neuenProtokollErstellenButton = new JButton();
-        neuenProtokollErstellenButton.setText("neues Protokoll erstellen");
-        startseiteProtokollePanel.add(neuenProtokollErstellenButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        neuesProtokollErstellenButton = new JButton();
+        neuesProtokollErstellenButton.setText("neues Protokoll erstellen");
+        startseiteProtokollePanel.add(neuesProtokollErstellenButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer4 = new Spacer();
         startseiteProtokollePanel.add(spacer4, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         buttonAbbrechenStartseiteProtokollePanel = new JPanel();

@@ -18,7 +18,7 @@ import java.text.ParseException;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.*;
 import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.defaultZahl;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahr;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahr1;
 
 @Controller
 public class ProtokollJahrController {
@@ -74,6 +74,8 @@ public class ProtokollJahrController {
         if (protokollId == null) {
             this.protokollDto = new ProtokollDto();
             protokollDto.setPersonId(personId);
+            protokollDto.setKeinePflanzenschutzmittel(AumBeantragungEnum.NICHT_BEANTRAGT);
+            protokollDto.setMin100qmGruenflaeche(AumBeantragungEnum.NICHT_BEANTRAGT);
             protokollDto.setTierAnzahl(defaultZahl);
         } else {
             this.protokollDto = protokollService.readProtokollFromId(protokollId);
@@ -94,7 +96,7 @@ public class ProtokollJahrController {
         } else if (gui.getTiereVorhandenNeinRadioButton().isSelected()) {
             protokollDto.setTiereVorhanden(Boolean.FALSE);
         }
-        protokollDto.setErfassungsjahr(erfassungsjahr);
+        protokollDto.setErfassungsjahr(erfassungsjahr1);
         protokollDto.setTierAnzahl((Integer) gui.getTieranzahlSpinner().getValue());
         protokollDto.setWeideflaeche(parseBigDecimal(gui.getWeideflaecheTextField().getText()));
         protokollDto.setGetreide(gui.getGetreideCheckBox().isSelected());
@@ -137,11 +139,7 @@ public class ProtokollJahrController {
     }
 
     private boolean aumEnumToboolean(AumBeantragungEnum aumEnum){
-        if(aumEnum == null){
-            return false;
-        } else{
             return aumEnum.equals(AumBeantragungEnum.NEU_BEANTRAGT);
-        }
     }
 
     private AumBeantragungEnum booleanToAumEnum(boolean checkboxWert){

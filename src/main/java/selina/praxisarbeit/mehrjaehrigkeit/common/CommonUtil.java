@@ -8,8 +8,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.defaultZahl;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.leererString;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahre;
 
 public class CommonUtil {
 
@@ -69,5 +69,16 @@ public class CommonUtil {
             ausgabe = getDateFormat().format(date);
         }
         return ausgabe;
+    }
+
+    public static int getAktuellesJahr(){
+        return erfassungsjahre.get(erfassungsjahre.size()-1);
+    }
+
+    public static int setErfassungsjahr(int erfassungsjahr){
+        if(erfassungsjahr == 0){
+            erfassungsjahr = getAktuellesJahr();
+        }
+        return erfassungsjahr;
     }
 }
