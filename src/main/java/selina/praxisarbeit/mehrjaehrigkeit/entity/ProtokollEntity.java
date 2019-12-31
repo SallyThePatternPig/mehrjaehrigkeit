@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -31,7 +28,9 @@ public class ProtokollEntity {
     private boolean nichts;
     private BigDecimal anbauflaeche;
     private BigDecimal gesamtflaeche;
+    @Enumerated(EnumType.STRING)
     private AumBeantragungEnum keinePflanzenschutzmittel;
+    @Enumerated(EnumType.STRING)
     private AumBeantragungEnum min100qmGruenflaeche;
 
     @ManyToOne
