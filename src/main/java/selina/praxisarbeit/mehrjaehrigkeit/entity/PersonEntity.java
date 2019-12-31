@@ -20,6 +20,8 @@ public class PersonEntity {
     @GeneratedValue
     private Long id;
 
+    private int aktualisierungsjahr;
+
     private String nachname;
 
     private String vorname;

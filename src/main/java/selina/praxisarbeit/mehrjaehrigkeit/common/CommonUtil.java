@@ -81,4 +81,35 @@ public class CommonUtil {
         }
         return erfassungsjahr;
     }
+
+    public static boolean gleichgleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) == 0;
+    }
+
+    public static boolean kleiner(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) < 0;
+    }
+
+    public static boolean kleinergleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) <= 0;
+    }
+
+    public static boolean groessergleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) > 0;
+    }
+
+    public static boolean groesser(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) >= 0;
+    }
+
+    public static boolean nichtgleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) != 0;
+    }
+
+    public static BigDecimal nullZu0 (BigDecimal bigDecimal){
+        if(bigDecimal == null){
+            return BigDecimal.ZERO;
+        }
+        return bigDecimal;
+    }
 }
