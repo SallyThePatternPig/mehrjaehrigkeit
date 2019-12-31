@@ -7,7 +7,8 @@ import java.util.List;
 public class Contants {
 
     public static int erfassungsjahr1 = 2019;
-    public static int erfassungsjahr2 = 2020; //das höchste Jahr ist immer das aktuelle Jahr!
+    public static int erfassungsjahr2 = 2020;
+    //das höchste Jahr ist immer das aktuelle Jahr!
     public static List<Integer> erfassungsjahre = Arrays.asList(erfassungsjahr2, erfassungsjahr1);
     public static int aumGueltigkeit = 2;
     public static int qmProTier = 3;

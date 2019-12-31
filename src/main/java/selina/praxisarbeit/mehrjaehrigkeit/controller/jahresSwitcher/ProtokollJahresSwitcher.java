@@ -1,58 +1,43 @@
 package selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
-import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
-import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui;
-import selina.praxisarbeit.mehrjaehrigkeit.view.ProtokollJahr1Gui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.ProtokollJahrGui;
+
+import javax.swing.*;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.formatDate;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
 import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
 
-@Controller
 public class ProtokollJahresSwitcher {
 
-    @Autowired
-    private ProtokollService protokollService;
+    private ProtokollJahrGui protokollGui;
 
-    private ProtokollJahr1Gui protokollGui;
-
-    private AuswahlBestehenderProtokolleGui auswahlProtokollGui;
-
-    public ProtokollJahresSwitcher(){
+    public ProtokollJahresSwitcher(ProtokollJahrGui protokollGui){
+        this.protokollGui = protokollGui;
         setAllUnterschiedeInvisible();
     }
 
-    public ProtokollJahr1Gui activateErfassungsjahrGui(int erfassungsjahr, ProtokollJahr1Gui gui){
-        this.protokollGui = gui;
+    public void activateErfassungsjahrGui(int erfassungsjahr){
         if(erfassungsjahr == erfassungsjahr1) {
             activateErfassungsjahr1Gui();
         } else if(erfassungsjahr == erfassungsjahr2){
             activateErfassungsjahr2Gui();
         }
-
-        return protokollGui;
     }
 
-    public ProtokollJahr1Gui fillErfassungsJahrGui(ProtokollDto protokollDto, PersonDto personDto, ProtokollJahr1Gui gui){
-        this.protokollGui = gui;
+    public void fillErfassungsJahrGui(ProtokollDto protokollDto, PersonDto personDto){
         if(protokollDto.getErfassungsjahr() == erfassungsjahr1){
             fillErfassungsjahr1Gui(protokollDto, personDto);
+            setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrKeinePflanzenschutzmittelLabel(), protokollDto.getKeinePflanzenschutzmittelAbJahr());
+            setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrmin100QmGruenflaecheLabel(), protokollDto.getMin100qmGruenflaecheAbJahr());
         }else if(protokollDto.getErfassungsjahr() == erfassungsjahr2){
             fillErfassungsjahr2Gui(protokollDto, personDto);
+            setGuiBeantragungsjahrAltAum(protokollGui.getBeantragungsJahrKeinePflanzenschutzmittelLabel(),
+                    protokollGui.getKeineNutzungPflanzenschutzmittelLabel(), protokollDto.getKeinePflanzenschutzmittelAbJahr());
+            setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrmin100QmGruenflaecheLabel(), protokollDto.getMin100qmGruenflaecheAbJahr());
+            setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrFeldhamsterLabel(), protokollDto.getFeldhamsterAbJahr());
         }
-        return protokollGui;
-    }
-
-    private boolean activateAum(Integer aumJahr, int erfassungsjahr){
-        if(aumJahr == null) {
-            return false;
-        }else{
-            return aumJahr + aumGueltigkeit > erfassungsjahr;
-            }
     }
 
     private void activateErfassungsjahr1Gui(){
@@ -60,6 +45,7 @@ public class ProtokollJahresSwitcher {
         protokollGui.getGeburtsdatumDtoFillLabel().setVisible(true);
         protokollGui.getNichtsCheckBox().setVisible(true);
         protokollGui.getKeineNutzungPflanzenschutzmittelnCheckBox().setVisible(true);
+        protokollGui.getKeineNutzungPflanzenschutzmittelLabel().setVisible(true);
     }
 
     private void activateErfassungsjahr2Gui(){
@@ -69,6 +55,7 @@ public class ProtokollJahresSwitcher {
         protokollGui.getAnbauflaecheVorhandenJaRadioButton().setVisible(true);
         protokollGui.getAnbauFlaecheVorhandenNeinRadioButton().setVisible(true);
         protokollGui.getFeldhamsterCheckBox().setVisible(true);
+        protokollGui.getFeldhamsterLabel().setVisible(true);
     }
 
     private void fillErfassungsjahr1Gui(ProtokollDto protokollDto, PersonDto personDto){
@@ -87,6 +74,32 @@ public class ProtokollJahresSwitcher {
         protokollGui.getFeldhamsterCheckBox().setSelected(protokollDto.isFeldhamster());
     }
 
+    private void setGuiBeantragungsjahrAltAum(JLabel beantragungsjahrLabel, JLabel aumText, Integer beantragungsjahr){
+        if(beantragungsjahr == null){
+            beantragungsjahrLabel.setVisible(false);
+            aumText.setVisible(false);
+        }else{
+            beantragungsjahrLabel.setText(getAumBeantragungsJahrText(beantragungsjahr));
+        }
+    }
+
+    private void setGuiBeantragungsjahrAum(JLabel beantragungsjahrLabel, Integer beantragungsjahr){
+        if(beantragungsjahr == null){
+            beantragungsjahrLabel.setVisible(false);
+        }else{
+            beantragungsjahrLabel.setVisible(true);
+            beantragungsjahrLabel.setText(getAumBeantragungsJahrText(beantragungsjahr));
+        }
+    }
+
+    private String getAumBeantragungsJahrText(Integer beantragungsjahr){
+        String beantragungsjahrText = leererString;
+        if(beantragungsjahr != null){
+            beantragungsjahrText = "Beantragt in" + beantragungsjahr;
+        }
+        return beantragungsjahrText;
+    }
+
     private void setAllUnterschiedeInvisible(){
         protokollGui.getGeburtsdatumLabel().setVisible(false);
         protokollGui.getGeburtsdatumDtoFillLabel().setVisible(false);
@@ -97,6 +110,13 @@ public class ProtokollJahresSwitcher {
         protokollGui.getAnbauFlaecheVorhandenNeinRadioButton().setVisible(false);
         protokollGui.getNichtsCheckBox().setVisible(false);
         protokollGui.getKeineNutzungPflanzenschutzmittelnCheckBox().setVisible(false);
+        protokollGui.getKeineNutzungPflanzenschutzmittelLabel().setVisible(false);
+        protokollGui.getBeantragungsJahrKeinePflanzenschutzmittelLabel().setVisible(false);
         protokollGui.getFeldhamsterCheckBox().setVisible(false);
+        protokollGui.getFeldhamsterLabel().setVisible(false);
+        protokollGui.getBeantragungsJahrFeldhamsterLabel().setVisible(false);
+        protokollGui.getBeantragungsJahrmin100QmGruenflaecheLabel().setVisible(false);
+        protokollGui.getGesamtflaecheVorherigesJahrLabel().setVisible(false);
+        protokollGui.getGesamtflaecheVorherigesJahrDtoFillLabel().setVisible(false);
     }
 }

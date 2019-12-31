@@ -21,8 +21,10 @@ public class ConverterProtokoll {
         protokollDto.setNichts(protokollEntity.isNichts());
         protokollDto.setAnbauflaeche(protokollEntity.getAnbauflaeche());
         protokollDto.setGesamtflaeche(protokollEntity.getGesamtflaeche());
-        protokollDto.setKeinePflanzenschutzmittel(protokollEntity.getKeinePflanzenschutzmittel());
-        protokollDto.setMin100qmGruenflaeche(protokollEntity.getMin100qmGruenflaeche());
+        protokollDto.setKeinePflanzenschutzmittelEnum(protokollEntity.getKeinePflanzenschutzmittel());
+        protokollDto.setMin100qmGruenflaecheEnum(protokollEntity.getMin100qmGruenflaeche());
+        protokollDto.setAnbauflaecheVorhanden(protokollEntity.getAnbauflaecheVorhanden());
+        protokollDto.setFeldhamsterEnum(protokollEntity.getFeldhamster());
         return protokollDto;
     }
 
@@ -42,7 +44,7 @@ public class ConverterProtokoll {
         return protokollDtoList;
     }
 
-    public ProtokollEntity convertToEntity(ProtokollDto protokollDto, ProtokollEntity protokollEntity){
+    public void convertToEntity(ProtokollDto protokollDto, ProtokollEntity protokollEntity){
         protokollEntity.setErfassungsjahr(protokollDto.getErfassungsjahr());
         protokollEntity.setTiereVorhanden(protokollDto.getTiereVorhanden());
         protokollEntity.setTierAnzahl(protokollDto.getTierAnzahl());
@@ -53,8 +55,6 @@ public class ConverterProtokoll {
         protokollEntity.setNichts(protokollDto.isNichts());
         protokollEntity.setAnbauflaeche(protokollDto.getAnbauflaeche());
         protokollEntity.setGesamtflaeche(protokollDto.getGesamtflaeche());
-        protokollEntity.setKeinePflanzenschutzmittel(protokollDto.getKeinePflanzenschutzmittel());
-        protokollEntity.setMin100qmGruenflaeche(protokollDto.getMin100qmGruenflaeche());
-        return protokollEntity;
+        protokollEntity.setAnbauflaecheVorhanden(protokollDto.getAnbauflaecheVorhanden());
     }
 }

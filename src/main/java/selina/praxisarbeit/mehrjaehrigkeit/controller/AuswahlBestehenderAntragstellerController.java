@@ -104,7 +104,7 @@ public class AuswahlBestehenderAntragstellerController {
 
         gui.getAntragstellerTable().setDefaultEditor(Object.class, null);
 
-        Object[] columnTopic = new Object[]{"ID", "Nachname", "Vorname", "Geschlecht", "Geburtsdatum", "Protokollanzahl"};
+        Object[] columnTopic = new Object[]{"ID", "Nachname", "Vorname", "Geschlecht", "Standort", "Protokollanzahl"};
 
         tableModel.setColumnIdentifiers(columnTopic);
 
@@ -112,7 +112,7 @@ public class AuswahlBestehenderAntragstellerController {
 
         for (PersonDto personDto: personList) {
             Object[] rowInput = new Object[]{personDto.getId(), personDto.getNachname(), personDto.getVorname(),
-                    personDto.getGeschlecht(), getDateFormat().format(personDto.getGeburtstdatum()), personDto.getProtokolle().size()};
+                    personDto.getGeschlecht(), personDto.getStandort(), personDto.getProtokolle().size()};
             tableModel.addRow(rowInput);
         }
 

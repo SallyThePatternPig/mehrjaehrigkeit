@@ -3,13 +3,16 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
-import selina.praxisarbeit.mehrjaehrigkeit.entity.PersonEntity;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
+import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
+import selina.praxisarbeit.mehrjaehrigkeit.view.MessageDialog;
 import selina.praxisarbeit.mehrjaehrigkeit.view.StartseiteProtokolleGui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
 
 @Controller
 public class StartseiteProtokolleController {
@@ -25,6 +28,9 @@ public class StartseiteProtokolleController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private ProtokollService protokollService;
 
     private JFrame myFrame;
 
@@ -53,8 +59,13 @@ public class StartseiteProtokolleController {
         gui.getNeuenProtokollErstellenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                myFrame.remove(gui.getStartseiteProtokollePanel());
-                protokollController.drawGui(myFrame, personId, null);
+                if (protokollService.isKeinProtokollImJahr(personId)) {
+                    myFrame.remove(gui.getStartseiteProtokollePanel());
+                    protokollController.activateGui(myFrame, personId, null);
+                } else {
+                    new MessageDialog(gui.getStartseiteProtokollePanel(), "Es ist bereits ein Antrag für "
+                            + getAktuellesJahr() + " vorhanden. Es kann für jedes Jahr nur ein Protokoll geben.");
+                }
             }
         });
     }

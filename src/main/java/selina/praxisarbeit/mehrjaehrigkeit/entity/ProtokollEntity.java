@@ -40,7 +40,7 @@ public class ProtokollEntity {
     private AumBeantragungEnum min100qmGruenflaeche;
     //ab 2020:
     private Boolean anbauflaecheVorhanden;
-    private boolean feldhamster;
+    private AumBeantragungEnum feldhamster;
 
     @ManyToOne
     private PersonEntity antragsteller;

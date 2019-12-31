@@ -83,4 +83,14 @@ public class CommonUtil {
         }
         return erfassungsjahr;
     }
+
+    public static <ElementTyp> ElementTyp getFirstListelement(List<ElementTyp> liste){
+        if(liste.size() == 0){
+            return null;
+        }else if (liste.size() == 1){
+            return liste.get(0);
+        }else{
+            throw new IllegalStateException("kommt from methode getFirstListelement, weil mehr als ein ergebnis");
+        }
+    }
 }

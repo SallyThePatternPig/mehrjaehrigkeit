@@ -26,9 +26,6 @@ public class AuswahlBestehenderProtkolleController {
     private ProtokollJahrController protokollJahrController;
 
     @Autowired
-    private ProtokollJahresSwitcher protokollJahresSwitcher;
-
-    @Autowired
     private ProtokollService protokollService;
 
     private JFrame myFrame;
@@ -65,7 +62,7 @@ public class AuswahlBestehenderProtkolleController {
                 if(isRowSelected(gui.getProtokollTable())){
                     Long protokollId = getIdFromRowSelection(tableModel, gui.getProtokollTable());
                     myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
-                    protokollJahrController.drawGui(myFrame, personId, protokollId);
+                    protokollJahrController.activateGui(myFrame, personId, protokollId);
                 }
             }
         });
@@ -103,8 +100,8 @@ public class AuswahlBestehenderProtkolleController {
         Set<ProtokollDto> protokollDtoSet = protokollService.readAllProtokolle(personId);
 
         for(ProtokollDto protokollDto : protokollDtoSet){
-            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.getMin100qmGruenflaeche(),
-                    protokollDto.isFeldhamster(), protokollDto.getKeinePflanzenschutzmittel()};
+            Object[] rowInput = new Object[]{protokollDto.getId(), protokollDto.getErfassungsjahr(), protokollDto.getMin100qmGruenflaecheEnum(),
+                    protokollDto.getFeldhamsterEnum(), protokollDto.getKeinePflanzenschutzmittelEnum()};
             tableModel.addRow(rowInput);
         }
 

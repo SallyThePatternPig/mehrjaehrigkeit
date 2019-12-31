@@ -6,7 +6,7 @@ import selina.praxisarbeit.mehrjaehrigkeit.common.GeschlechtEnum;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
 import selina.praxisarbeit.mehrjaehrigkeit.validation.ValidationException;
-import selina.praxisarbeit.mehrjaehrigkeit.view.AntragstellerJahr1Gui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.AntragstellerJahrGui;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +28,7 @@ public class AntragstellerJahr1Controller {
 
     private PersonDto personDto;
 
-    private AntragstellerJahr1Gui gui = new AntragstellerJahr1Gui();
+    private AntragstellerJahrGui gui = new AntragstellerJahrGui();
 
     public AntragstellerJahr1Controller(){
         for(GeschlechtEnum geschlecht: GeschlechtEnum.values()) {

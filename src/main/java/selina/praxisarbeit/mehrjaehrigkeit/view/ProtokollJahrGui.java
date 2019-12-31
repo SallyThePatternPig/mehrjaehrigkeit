@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 @Getter
-public class ProtokollJahr1Gui {
+public class ProtokollJahrGui {
     private JPanel protokollJahr1Panel;
     private JLabel protokollJahr1Label;
     private JPanel fragePanel;
@@ -46,13 +46,18 @@ public class ProtokollJahr1Gui {
     private JCheckBox feldhamsterCheckBox;
     private JLabel beantragungsJahrKeinePflanzenschutzmittelLabel;
     private JLabel beantragungsJahrmin100QmGruenflaecheLabel;
-    private JLabel gesamtflaecheVorherigesJahrLabel;
+    private JLabel gesamtflaecheVorherigesJahrDtoFillLabel;
     private JRadioButton anbauflaecheVorhandenJaRadioButton;
     private JRadioButton anbauFlaecheVorhandenNeinRadioButton;
     private JLabel anbauflaecheVorhandenFrageLabel;
     private JLabel wasWirdAngebautLabel;
     private JLabel geburtsdatumLabel;
     private JLabel standortLabel;
+    private JLabel keineNutzungPflanzenschutzmittelLabel;
+    private JLabel min100QmGruenflaecheLabel;
+    private JLabel feldhamsterLabel;
+    private JLabel beantragungsJahrFeldhamsterLabel;
+    private JLabel gesamtflaecheVorherigesJahrLabel;
     private ButtonGroup anbauflaecheVorhandenButtonGroup;
     private ButtonGroup tiereVorhandenButtonGroup;
 
@@ -165,12 +170,12 @@ public class ProtokollJahr1Gui {
         if (label6Font != null) label6.setFont(label6Font);
         label6.setText("Gesamtfläche des vorherigen Jahres:");
         fragePanel.add(label6, new GridConstraints(10, 5, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        gesamtflaecheVorherigesJahrLabel = new JLabel();
-        Font gesamtflaecheVorherigesJahrLabelFont = this.$$$getFont$$$(null, Font.PLAIN, 11, gesamtflaecheVorherigesJahrLabel.getFont());
+        gesamtflaecheVorherigesJahrDtoFillLabel = new JLabel();
+        Font gesamtflaecheVorherigesJahrLabelFont = this.$$$getFont$$$(null, Font.PLAIN, 11, gesamtflaecheVorherigesJahrDtoFillLabel.getFont());
         if (gesamtflaecheVorherigesJahrLabelFont != null)
-            gesamtflaecheVorherigesJahrLabel.setFont(gesamtflaecheVorherigesJahrLabelFont);
-        gesamtflaecheVorherigesJahrLabel.setText("[QmLetztesJahr]");
-        fragePanel.add(gesamtflaecheVorherigesJahrLabel, new GridConstraints(10, 7, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+            gesamtflaecheVorherigesJahrDtoFillLabel.setFont(gesamtflaecheVorherigesJahrLabelFont);
+        gesamtflaecheVorherigesJahrDtoFillLabel.setText("[QmLetztesJahr]");
+        fragePanel.add(gesamtflaecheVorherigesJahrDtoFillLabel, new GridConstraints(10, 7, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         fragePanel.add(spacer2, new GridConstraints(10, 8, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         anbauflaecheVorhandenFrageLabel = new JLabel();

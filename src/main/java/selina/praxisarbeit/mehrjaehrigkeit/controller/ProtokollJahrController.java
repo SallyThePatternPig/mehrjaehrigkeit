@@ -2,13 +2,13 @@ package selina.praxisarbeit.mehrjaehrigkeit.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
+import selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher.ProtokollJahresSwitcher;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
 import selina.praxisarbeit.mehrjaehrigkeit.validation.ValidationException;
-import selina.praxisarbeit.mehrjaehrigkeit.view.ProtokollJahr1Gui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.ProtokollJahrGui;
 import selina.praxisarbeit.mehrjaehrigkeit.view.MessageDialog;
 
 import javax.swing.*;
@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.*;
-import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
 
 @Controller
 public class ProtokollJahrController {
@@ -39,7 +38,9 @@ public class ProtokollJahrController {
 
     private PersonDto personDto;
 
-    private ProtokollJahr1Gui gui = new ProtokollJahr1Gui();
+    private ProtokollJahrGui gui = new ProtokollJahrGui();
+
+    private ProtokollJahresSwitcher jahresSwitcher = new ProtokollJahresSwitcher(gui);
 
     public ProtokollJahrController() {
 
@@ -69,14 +70,13 @@ public class ProtokollJahrController {
         });
     }
 
-    public void drawGui(JFrame frame, Long personId, Long protokollId) {
+    public void activateGui(JFrame frame, Long personId, Long protokollId) {
         if (protokollId == null) {
-            this.protokollDto = new ProtokollDto();
-            protokollDto.setPersonId(personId);
-            protokollDto.setTierAnzahl(defaultZahl);
+            this.protokollDto = protokollService.createNewProtokollDto(personId);
         } else {
             this.protokollDto = protokollService.readProtokollFromId(protokollId);
         }
+        jahresSwitcher.activateErfassungsjahrGui(protokollDto.getErfassungsjahr());
         this.personId = personId;
         this.personDto = personService.readPersonFromId(personId);
         fillProtokollGUI();
@@ -104,8 +104,14 @@ public class ProtokollJahrController {
         protokollDto.setNichts(gui.getNichtsCheckBox().isSelected());
         protokollDto.setAnbauflaeche(parseBigDecimal(gui.getAnbauflaecheTextField().getText()));
         protokollDto.setGesamtflaeche(parseBigDecimal(gui.getGesamtFlaecheTextField().getText()));
-        protokollDto.setKeinePflanzenschutzmittel(booleanToAumEnum(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected()));
-        protokollDto.setMin100qmGruenflaeche(booleanToAumEnum(gui.getMin100QmGruenflaecheCheckBox().isSelected()));
+        protokollDto.setKeinePflanzenschutzmittel(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected());
+        protokollDto.setMin100qmGruenflaeche(gui.getMin100QmGruenflaecheCheckBox().isSelected());
+        protokollDto.setFeldhamster(gui.getFeldhamsterCheckBox().isSelected());
+        if(gui.getAnbauflaecheVorhandenJaRadioButton().isSelected()){
+            protokollDto.setAnbauflaecheVorhanden(Boolean.TRUE);
+        }else if(gui.getAnbauFlaecheVorhandenNeinRadioButton().isSelected()){
+            protokollDto.setAnbauflaecheVorhanden(Boolean.FALSE);
+        }
     }
 
     private void fillProtokollGUI() {
@@ -132,25 +138,9 @@ public class ProtokollJahrController {
 
         gui.getAnbauflaecheTextField().setText(formatBigDecimal(protokollDto.getAnbauflaeche()));
         gui.getGesamtFlaecheTextField().setText(formatBigDecimal(protokollDto.getGesamtflaeche()));
-        gui.getKeineNutzungPflanzenschutzmittelnCheckBox().setSelected(aumEnumToboolean(protokollDto.getKeinePflanzenschutzmittel()));
-        gui.getMin100QmGruenflaecheCheckBox().setSelected(aumEnumToboolean(protokollDto.getMin100qmGruenflaeche()));
+        gui.getKeineNutzungPflanzenschutzmittelnCheckBox().setSelected(protokollDto.isKeinePflanzenschutzmittel());
+        gui.getMin100QmGruenflaecheCheckBox().setSelected(protokollDto.isMin100qmGruenflaeche());
+        jahresSwitcher.fillErfassungsJahrGui(protokollDto, personDto);
     }
 
-    private boolean aumEnumToboolean(AumBeantragungEnum aumEnum){
-        if(aumEnum == null){
-            return false;
-        } else{
-            return aumEnum.equals(AumBeantragungEnum.NEU_BEANTRAGT);
-        }
-    }
-
-    private AumBeantragungEnum booleanToAumEnum(boolean checkboxWert){
-        AumBeantragungEnum aumEnum;
-        if(checkboxWert){
-            aumEnum = AumBeantragungEnum.NEU_BEANTRAGT;
-        } else{
-            aumEnum = AumBeantragungEnum.NICHT_BEANTRAGT;
-        }
-        return aumEnum;
-    }
 }

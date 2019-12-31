@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 @Getter
-public class AntragstellerJahr1Gui {
+public class AntragstellerJahrGui {
     private JPanel antragstellerPanel;
     private JComboBox geschlechtComboBox;
     private JTextField vornameTextField;

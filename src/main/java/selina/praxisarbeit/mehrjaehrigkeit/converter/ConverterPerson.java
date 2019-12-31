@@ -15,7 +15,7 @@ public class ConverterPerson {
         pDto.setNachname(pE.getNachname());
         ConverterProtokoll cA = new ConverterProtokoll();
         pDto.setProtokolle(cA.convertToDto(pE.getProtokolle()));
-        pDto.setGeburtstdatum(pE.getGeburtstdatum());
+        pDto.setStandort(pE.getStandort());
         pDto.setGeschlecht(pE.getGeschlecht());
         return pDto;
     }
@@ -32,7 +32,7 @@ public class ConverterPerson {
         personEntity.setId(personDto.getId());
         personEntity.setVorname(personDto.getVorname());
         personEntity.setNachname(personDto.getNachname());
-        personEntity.setGeburtstdatum(personDto.getGeburtstdatum());
+        personEntity.setStandort(personDto.getStandort());
         personEntity.setGeschlecht(personDto.getGeschlecht());
     }
 }
