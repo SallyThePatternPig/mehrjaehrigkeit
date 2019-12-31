@@ -13,6 +13,8 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
+
 @Service
 @Transactional
 public class PersonService {
@@ -40,6 +42,7 @@ public class PersonService {
             personEntity = entityManager.find(PersonEntity.class, personDto.getId());
         }
         new ConverterPerson().convertToEntity(personDto, personEntity);
+        personEntity.setAktualisierungsjahr(getAktuellesJahr());
         personEntityValidator.validate(personEntity);
         entityManager.persist(personEntity);
     }

@@ -19,6 +19,8 @@ import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuelles
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getFirstListelement;
 import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
 
+import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
+
 @Service
 @Transactional
 public class ProtokollService {

@@ -56,7 +56,7 @@ public class StartseiteProtokolleController {
             }
         });
 
-        gui.getNeuenProtokollErstellenButton().addActionListener(new ActionListener() {
+        gui.getNeuesProtokollErstellenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (protokollService.isKeinProtokollImJahr(personId)) {

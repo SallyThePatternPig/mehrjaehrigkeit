@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.*;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahre;
 
 public class CommonUtil {
 
@@ -92,5 +94,47 @@ public class CommonUtil {
         }else{
             throw new IllegalStateException("kommt from methode getFirstListelement, weil mehr als ein ergebnis");
         }
+    }
+
+    public static int getAktuellesJahr(){
+        return erfassungsjahre.get(erfassungsjahre.size()-1);
+    }
+
+    public static int setErfassungsjahr(int erfassungsjahr){
+        if(erfassungsjahr == 0){
+            erfassungsjahr = getAktuellesJahr();
+        }
+        return erfassungsjahr;
+    }
+
+    public static boolean gleichgleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) == 0;
+    }
+
+    public static boolean kleiner(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) < 0;
+    }
+
+    public static boolean kleinergleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) <= 0;
+    }
+
+    public static boolean groessergleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) > 0;
+    }
+
+    public static boolean groesser(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) >= 0;
+    }
+
+    public static boolean nichtgleich(BigDecimal zahl1, BigDecimal zahl2){
+        return zahl1.compareTo(zahl2) != 0;
+    }
+
+    public static BigDecimal nullZu0 (BigDecimal bigDecimal){
+        if(bigDecimal == null){
+            return BigDecimal.ZERO;
+        }
+        return bigDecimal;
     }
 }

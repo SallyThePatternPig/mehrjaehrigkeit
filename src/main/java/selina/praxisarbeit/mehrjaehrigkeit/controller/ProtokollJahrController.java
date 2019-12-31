@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.*;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.defaultZahl;
+import static selina.praxisarbeit.mehrjaehrigkeit.common.Contants.erfassungsjahr1;
 
 @Controller
 public class ProtokollJahrController {
