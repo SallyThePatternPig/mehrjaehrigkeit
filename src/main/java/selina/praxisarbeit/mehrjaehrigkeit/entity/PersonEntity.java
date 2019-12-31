@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import selina.praxisarbeit.mehrjaehrigkeit.common.GeschlechtEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -29,6 +26,7 @@ public class PersonEntity {
     //wird benötigt für Jahr 2019
     private Date geburtstdatum;
 
+    @Enumerated(EnumType.STRING)
     private GeschlechtEnum geschlecht;
 
     //wird ab 2020 benötigt

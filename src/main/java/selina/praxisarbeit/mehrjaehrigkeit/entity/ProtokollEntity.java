@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import selina.praxisarbeit.mehrjaehrigkeit.common.AumBeantragungEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Getter
@@ -35,8 +32,10 @@ public class ProtokollEntity {
 
     //nur 2019:
     private boolean nichts;
+    @Enumerated(EnumType.STRING)
     private AumBeantragungEnum keinePflanzenschutzmittel;
     //ab 2019:
+    @Enumerated(EnumType.STRING)
     private AumBeantragungEnum min100qmGruenflaeche;
     //ab 2020:
     private Boolean anbauflaecheVorhanden;
