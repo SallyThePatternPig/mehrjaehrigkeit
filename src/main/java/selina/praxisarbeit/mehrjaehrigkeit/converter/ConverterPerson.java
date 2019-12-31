@@ -11,6 +11,7 @@ public class ConverterPerson {
     public PersonDto convertToDto (PersonEntity pE){
         PersonDto pDto = new PersonDto();
         pDto.setId(pE.getId());
+        pDto.setAktualisierungsjahr(pE.getAktualisierungsjahr());
         pDto.setVorname(pE.getVorname());
         pDto.setNachname(pE.getNachname());
         ConverterProtokoll cA = new ConverterProtokoll();
@@ -30,6 +31,7 @@ public class ConverterPerson {
 
     public void convertToEntity (PersonDto personDto, PersonEntity personEntity){
         personEntity.setId(personDto.getId());
+        personEntity.setAktualisierungsjahr(personDto.getAktualisierungsjahr());
         personEntity.setVorname(personDto.getVorname());
         personEntity.setNachname(personDto.getNachname());
         personEntity.setStandort(personDto.getStandort());

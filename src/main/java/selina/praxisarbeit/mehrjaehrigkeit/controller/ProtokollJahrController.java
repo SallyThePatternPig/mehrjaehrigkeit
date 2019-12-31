@@ -72,7 +72,7 @@ public class ProtokollJahrController {
         });
     }
 
-    public void activateGui(JFrame frame, Long personId, Long protokollId) {
+    public void activateGui(JFrame frame, Long personId, Long protokollId, boolean isSpeicherbar) {
         if (protokollId == null) {
             this.protokollDto = protokollService.createNewProtokollDto(personId);
         } else {
@@ -83,6 +83,7 @@ public class ProtokollJahrController {
         this.personDto = personService.readPersonFromId(personId);
         fillProtokollGUI();
         frame.add(gui.getProtokollJahr1Panel());
+        gui.getSpeichernButton().setEnabled(isSpeicherbar);
         frame.pack();
         frame.setLocationRelativeTo(null);
         this.myFrame = frame;

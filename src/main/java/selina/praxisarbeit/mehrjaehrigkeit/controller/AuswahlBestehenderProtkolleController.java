@@ -6,6 +6,7 @@ import selina.praxisarbeit.mehrjaehrigkeit.controller.jahresSwitcher.ProtokollJa
 import selina.praxisarbeit.mehrjaehrigkeit.dto.ProtokollDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.ProtokollService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderProtokolleGui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.MessageDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -50,9 +51,15 @@ public class AuswahlBestehenderProtkolleController {
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getProtokollTable())){
                     Long protokollId = getIdFromRowSelection(tableModel, gui.getProtokollTable());
-                    protokollService.removeProtokoll(protokollId);
-                    myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
-                    drawGui(myFrame, personId);
+                    ProtokollDto protokollDto = protokollService.readProtokollFromId(protokollId);
+                    if(protokollService.isHatFolgejahre(personId, protokollDto.getErfassungsjahr())){
+                        new MessageDialog(gui.getAuswahlBestehenderProtokollePanel(), "Da bereits Anträge in " +
+                                "folgenden Jahren existieren, kann das Protokoll nicht gelöscht werden.");
+                    }else {
+                        protokollService.removeProtokoll(protokollId);
+                        myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
+                        drawGui(myFrame, personId);
+                    }
                 }
             }
         });
@@ -61,8 +68,14 @@ public class AuswahlBestehenderProtkolleController {
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getProtokollTable())){
                     Long protokollId = getIdFromRowSelection(tableModel, gui.getProtokollTable());
-                    myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
-                    protokollJahrController.activateGui(myFrame, personId, protokollId);
+                    ProtokollDto protokollDto = protokollService.readProtokollFromId(protokollId);
+                    if(protokollService.isHatFolgejahre(personId, protokollDto.getErfassungsjahr())){
+                        new MessageDialog(gui.getAuswahlBestehenderProtokollePanel(), "Da bereits Anträge in " +
+                                "folgenden Jahren existieren, kann das Protokoll nicht bearbeitet werden.");
+                    }else {
+                        myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
+                        protokollJahrController.activateGui(myFrame, personId, protokollId, true);
+                    }
                 }
             }
         });
@@ -71,6 +84,9 @@ public class AuswahlBestehenderProtkolleController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getProtokollTable())){
+                    Long protokollId = getIdFromRowSelection(tableModel, gui.getProtokollTable());
+                    myFrame.remove(gui.getAuswahlBestehenderProtokollePanel());
+                    protokollJahrController.activateGui(myFrame, personId, protokollId, false);
 
                 }
             }

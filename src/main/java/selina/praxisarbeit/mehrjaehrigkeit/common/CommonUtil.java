@@ -96,17 +96,6 @@ public class CommonUtil {
         }
     }
 
-    public static int getAktuellesJahr(){
-        return erfassungsjahre.get(erfassungsjahre.size()-1);
-    }
-
-    public static int setErfassungsjahr(int erfassungsjahr){
-        if(erfassungsjahr == 0){
-            erfassungsjahr = getAktuellesJahr();
-        }
-        return erfassungsjahr;
-    }
-
     public static boolean gleichgleich(BigDecimal zahl1, BigDecimal zahl2){
         return zahl1.compareTo(zahl2) == 0;
     }

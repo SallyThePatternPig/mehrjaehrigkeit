@@ -61,7 +61,7 @@ public class StartseiteProtokolleController {
             public void actionPerformed(ActionEvent e) {
                 if (protokollService.isKeinProtokollImJahr(personId)) {
                     myFrame.remove(gui.getStartseiteProtokollePanel());
-                    protokollController.activateGui(myFrame, personId, null);
+                    protokollController.activateGui(myFrame, personId, null, true);
                 } else {
                     new MessageDialog(gui.getStartseiteProtokollePanel(), "Es ist bereits ein Antrag für "
                             + getAktuellesJahr() + " vorhanden. Es kann für jedes Jahr nur ein Protokoll geben.");

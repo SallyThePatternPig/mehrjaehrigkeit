@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import selina.praxisarbeit.mehrjaehrigkeit.dto.PersonDto;
 import selina.praxisarbeit.mehrjaehrigkeit.service.PersonService;
 import selina.praxisarbeit.mehrjaehrigkeit.view.AuswahlBestehenderAntragstellerGui;
+import selina.praxisarbeit.mehrjaehrigkeit.view.MessageDialog;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -72,8 +73,14 @@ public class AuswahlBestehenderAntragstellerController {
             public void actionPerformed(ActionEvent e) {
                 if(isRowSelected(gui.getAntragstellerTable())) {
                     personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
-                    myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
-                    antragstellerController.drawGui(myFrame, personId);
+                    PersonDto personDto = personService.readPersonFromId(personId);
+                    if(personDto.getAktualisierungsjahr() < getAktuellesJahr()){
+                        new MessageDialog(gui.getAuswahlBestehenderAntragstellerPanel(), "Die Daten des Antragstellers sind nicht aktuell. " +
+                                "Der Antragsteller muss erst bearbeitet werden um fortzufahren.");
+                    }else {
+                        myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
+                        antragstellerController.drawGui(myFrame, personId);
+                    }
                 }
             }
         });

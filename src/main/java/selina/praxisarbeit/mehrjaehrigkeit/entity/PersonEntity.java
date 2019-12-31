@@ -18,7 +18,7 @@ public class PersonEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long id; //gib ein die personId, sonst findest du die person nie
 
     private int aktualisierungsjahr;
 

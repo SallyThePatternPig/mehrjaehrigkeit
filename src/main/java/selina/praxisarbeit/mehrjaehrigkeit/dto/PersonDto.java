@@ -13,6 +13,8 @@ public class PersonDto {
 
     private Long id;
 
+    private int aktualisierungsjahr;
+
     private String nachname;
 
     private String vorname;

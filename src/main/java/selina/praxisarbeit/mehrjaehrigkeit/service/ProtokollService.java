@@ -103,6 +103,14 @@ public class ProtokollService {
         }
     }
 
+    public boolean isHatFolgejahre(Long personId, int erfassungsjahr){
+        TypedQuery<ProtokollEntity> query = entityManager.createQuery("select p from ProtokollEntity p where " +
+                "p.erfassungsjahr > :jahr and p.antragsteller.id = :personid", ProtokollEntity.class);
+        query.setParameter("jahr", erfassungsjahr);
+        query.setParameter("personid", personId);
+        return query.getResultList().size() != 0;
+    }
+
     public boolean isKeinProtokollImJahr(Long personId){
         TypedQuery<ProtokollEntity> query = entityManager.createQuery("select p from ProtokollEntity p where " +
                 "p.erfassungsjahr = :jahr and p.antragsteller.id = :personid", ProtokollEntity.class);
