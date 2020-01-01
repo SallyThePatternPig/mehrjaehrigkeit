@@ -15,10 +15,10 @@ public class ProtokollJahresSwitcher {
 
     public ProtokollJahresSwitcher(ProtokollJahrGui protokollGui){
         this.protokollGui = protokollGui;
-        setAllUnterschiedeInvisible();
     }
 
     public void activateErfassungsjahrGui(int erfassungsjahr){
+        setAllUnterschiedeInvisible();
         if(erfassungsjahr == erfassungsjahr1) {
             activateErfassungsjahr1Gui();
         } else if(erfassungsjahr == erfassungsjahr2){
@@ -37,6 +37,14 @@ public class ProtokollJahresSwitcher {
                     protokollGui.getKeineNutzungPflanzenschutzmittelLabel(), protokollDto.getKeinePflanzenschutzmittelAbJahr());
             setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrmin100QmGruenflaecheLabel(), protokollDto.getMin100qmGruenflaecheAbJahr());
             setGuiBeantragungsjahrAum(protokollGui.getBeantragungsJahrFeldhamsterLabel(), protokollDto.getFeldhamsterAbJahr());
+        }
+    }
+
+    public void updateDtoErfassungsjahrFelder(ProtokollDto protokollDto, ProtokollJahrGui protokollGui){
+        if(protokollDto.getErfassungsjahr() == erfassungsjahr1){
+            updtateDtoErfassungsjahr1(protokollDto, protokollGui);
+        }else if(protokollDto.getErfassungsjahr() == erfassungsjahr2){
+            updateDtoErfassungsjahr2(protokollDto, protokollGui);
         }
     }
 
@@ -72,6 +80,20 @@ public class ProtokollJahresSwitcher {
             protokollGui.getAnbauFlaecheVorhandenNeinRadioButton().setSelected(true);
         }
         protokollGui.getFeldhamsterCheckBox().setSelected(protokollDto.isFeldhamster());
+    }
+
+    private void updtateDtoErfassungsjahr1(ProtokollDto protokollDto, ProtokollJahrGui gui){
+        protokollDto.setNichts(gui.getNichtsCheckBox().isSelected());
+        protokollDto.setKeinePflanzenschutzmittel(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected());
+    }
+
+    private void updateDtoErfassungsjahr2(ProtokollDto protokollDto, ProtokollJahrGui gui){
+        protokollDto.setFeldhamster(gui.getFeldhamsterCheckBox().isSelected());
+        if(gui.getAnbauflaecheVorhandenJaRadioButton().isSelected()){
+            protokollDto.setAnbauflaecheVorhanden(Boolean.TRUE);
+        }else if(gui.getAnbauFlaecheVorhandenNeinRadioButton().isSelected()){
+            protokollDto.setAnbauflaecheVorhanden(Boolean.FALSE);
+        }
     }
 
     private void setGuiBeantragungsjahrAltAum(JLabel beantragungsjahrLabel, JLabel aumText, Integer beantragungsjahr){
@@ -116,7 +138,5 @@ public class ProtokollJahresSwitcher {
         protokollGui.getFeldhamsterLabel().setVisible(false);
         protokollGui.getBeantragungsJahrFeldhamsterLabel().setVisible(false);
         protokollGui.getBeantragungsJahrmin100QmGruenflaecheLabel().setVisible(false);
-        protokollGui.getGesamtflaecheVorherigesJahrLabel().setVisible(false);
-        protokollGui.getGesamtflaecheVorherigesJahrDtoFillLabel().setVisible(false);
     }
 }

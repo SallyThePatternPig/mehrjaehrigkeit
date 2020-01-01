@@ -41,5 +41,6 @@ public class ProtokollDto {
     private boolean feldhamster;
     private AumBeantragungEnum feldhamsterEnum;
     private Integer feldhamsterAbJahr;
+    private BigDecimal vorjahresGesamtflaeche;
 
 }

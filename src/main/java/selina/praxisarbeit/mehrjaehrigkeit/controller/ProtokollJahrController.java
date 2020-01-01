@@ -104,17 +104,10 @@ public class ProtokollJahrController {
         protokollDto.setGetreide(gui.getGetreideCheckBox().isSelected());
         protokollDto.setBluehpflanzen(gui.getBluehpflanzenCheckBox().isSelected());
         protokollDto.setAnderes(gui.getAnderesCheckBox().isSelected());
-        protokollDto.setNichts(gui.getNichtsCheckBox().isSelected());
         protokollDto.setAnbauflaeche(parseBigDecimal(gui.getAnbauflaecheTextField().getText()));
         protokollDto.setGesamtflaeche(parseBigDecimal(gui.getGesamtFlaecheTextField().getText()));
-        protokollDto.setKeinePflanzenschutzmittel(gui.getKeineNutzungPflanzenschutzmittelnCheckBox().isSelected());
         protokollDto.setMin100qmGruenflaeche(gui.getMin100QmGruenflaecheCheckBox().isSelected());
-        protokollDto.setFeldhamster(gui.getFeldhamsterCheckBox().isSelected());
-        if(gui.getAnbauflaecheVorhandenJaRadioButton().isSelected()){
-            protokollDto.setAnbauflaecheVorhanden(Boolean.TRUE);
-        }else if(gui.getAnbauFlaecheVorhandenNeinRadioButton().isSelected()){
-            protokollDto.setAnbauflaecheVorhanden(Boolean.FALSE);
-        }
+        jahresSwitcher.updateDtoErfassungsjahrFelder(protokollDto, gui);
     }
 
     private void fillProtokollGUI() {
@@ -123,10 +116,18 @@ public class ProtokollJahrController {
         } else {
             gui.getBearbeitenErstellenLabel().setText("Protokoll (ID: " + protokollDto.getId() + ") bearbeiten");
         }
+        gui.getProtokollJahrLabel().setText("Protokoll von " + protokollDto.getErfassungsjahr());
         gui.getPersonIdDtoFillLabel().setText(personDto.getId().toString());
         gui.getNachnameDtoFillLabel().setText(personDto.getNachname());
         gui.getVornameDtoFillLabel().setText(personDto.getVorname());
         gui.getGeschlechtDtoFillLabel().setText(personDto.getGeschlecht().toString());
+
+        if(protokollDto.getVorjahresGesamtflaeche() == null){
+            gui.getGesamtflaecheVorherigesJahrLabel().setVisible(false);
+            gui.getGesamtflaecheVorherigesJahrDtoFillLabel().setVisible(false);
+        }else{
+            gui.getGesamtflaecheVorherigesJahrDtoFillLabel().setText(formatBigDecimal(protokollDto.getVorjahresGesamtflaeche()));
+        }
 
         if (protokollDto.getTiereVorhanden() == Boolean.TRUE) {
             gui.getTiereVorhandenJaRadioButton().setSelected(true);

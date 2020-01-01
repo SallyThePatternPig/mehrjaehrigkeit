@@ -44,7 +44,7 @@ public class ProtokollEntityValidator {
 
             } else if (protokollEntity.getWeideflaeche() == null || kleiner(weideflaeche, mindestQmTiere)) {
                 throw new ValidationException("Die minimale Quadratmeterzahl (" + qmProTier + ") pro Tier wurde nicht eingehalten. Die Zahl muss bei "
-                        + tieranzahl + " Tieren mindestens " + mindestQmTiere + " qm betragen.");
+                        + tieranzahl + " Tieren mindestens " + formatBigDecimal(mindestQmTiere) + " qm betragen.");
             }
         }
 
@@ -59,17 +59,6 @@ public class ProtokollEntityValidator {
         if ((gleichgleich(anbauflaeche, big0) || protokollEntity.getAnbauflaeche() == null) && etwasAngebaut) {
             throw new ValidationException("Das Feld für die Größe der Anbaufläche muss befüllt und  größer/gleich als 1 sein.");
         }
-        if (!protokollEntity.isNichts() && !etwasAngebaut) {
-            throw new ValidationException("Es muss mindestens eine CheckBox ausgewählt sein.");
-        }
-
-        if (protokollEntity.isNichts() && etwasAngebaut) {
-            throw new ValidationException("Die CheckBox 'Nichts' darf nicht mit anderen CheckBoxen zusammen ausgewählt sein.");
-        }
-
-        if ((protokollEntity.getAnbauflaeche() == null || nichtgleich(anbauflaeche, big0)) && protokollEntity.isNichts()) {
-            throw new ValidationException("Wenn keine Fläche, auf der etwas angebaut wird, existiert, muss 0 in das Feld eingtragen werden.");
-        }
 
         if ((kleinergleich(anbauflaeche, big0) || protokollEntity.getAnbauflaeche() == null) && etwasAngebaut) {
             throw new ValidationException("Das Feld für die Größe der Anbaufläche muss befüllt und  größer als 0 sein.");
@@ -80,13 +69,13 @@ public class ProtokollEntityValidator {
         }
 
         if (kleiner(gesamtflaeche, korrekteGesamtflaeche)) {
-            throw new ValidationException("Die Gesamtfläche muss mindestens " + korrekteGesamtflaeche + " betragen.");
+            throw new ValidationException("Die Gesamtfläche muss mindestens " + formatBigDecimal(korrekteGesamtflaeche) + " betragen.");
         }
 
         if ((protokollEntity.getMin100qmGruenflaeche().equals(AumBeantragungEnum.NEU_BEANTRAGT) ||
                 protokollEntity.getMin100qmGruenflaeche().equals(AumBeantragungEnum.LAEUFT)) && kleiner(gesamtflaeche, noetigeAUMGesamtflaeche)) {
             throw new ValidationException("Um die AUM zu beantragen müssen mindestens 100 qm ungenutzte Fläche existieren." +
-                    "Die Quadratmeterzahl muss also mindestens " + noetigeAUMGesamtflaeche + " betragen.");
+                    "Die Quadratmeterzahl muss also mindestens " + formatBigDecimal(noetigeAUMGesamtflaeche) + " betragen.");
         }
 
     }
@@ -104,7 +93,7 @@ public class ProtokollEntityValidator {
         }
 
         if ((protokollEntity.getAnbauflaeche() == null || nichtgleich(anbauflaeche, big0)) && protokollEntity.isNichts()) {
-            throw new ValidationException("Wenn keine Fläche existiert, auf der etwas angebaut wird, muss 0 in das Feld eingtragen werden.");
+            throw new ValidationException("Wenn keine Fläche, auf der etwas angebaut wird, existiert, muss 0 in das Feld eingtragen werden.");
         }
     }
 

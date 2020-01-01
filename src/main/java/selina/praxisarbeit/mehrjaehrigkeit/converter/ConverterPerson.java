@@ -18,6 +18,7 @@ public class ConverterPerson {
         pDto.setProtokolle(cA.convertToDto(pE.getProtokolle()));
         pDto.setStandort(pE.getStandort());
         pDto.setGeschlecht(pE.getGeschlecht());
+        pDto.setGeburtstdatum(pE.getGeburtstdatum());
         return pDto;
     }
 

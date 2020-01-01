@@ -39,6 +39,7 @@ public class ProtokollEntity {
     private AumBeantragungEnum min100qmGruenflaeche;
     //ab 2020:
     private Boolean anbauflaecheVorhanden;
+    @Enumerated(EnumType.STRING)
     private AumBeantragungEnum feldhamster;
 
     @ManyToOne

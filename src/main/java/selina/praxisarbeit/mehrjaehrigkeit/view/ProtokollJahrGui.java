@@ -11,7 +11,7 @@ import java.awt.*;
 @Getter
 public class ProtokollJahrGui {
     private JPanel protokollJahr1Panel;
-    private JLabel protokollJahr1Label;
+    private JLabel protokollJahrLabel;
     private JPanel fragePanel;
     private JPanel aumPanel;
     private JLabel tiereFrageJahr1Label;
@@ -82,11 +82,11 @@ public class ProtokollJahrGui {
         ueberschriftPanel.setLayout(new GridLayoutManager(2, 1, new Insets(10, 10, 10, 10), -1, -1));
         protokollJahr1Panel.add(ueberschriftPanel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         ueberschriftPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null));
-        protokollJahr1Label = new JLabel();
-        Font protokollJahr1LabelFont = this.$$$getFont$$$(null, Font.BOLD, 18, protokollJahr1Label.getFont());
-        if (protokollJahr1LabelFont != null) protokollJahr1Label.setFont(protokollJahr1LabelFont);
-        protokollJahr1Label.setText("Protokoll Jahr 1");
-        ueberschriftPanel.add(protokollJahr1Label, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        protokollJahrLabel = new JLabel();
+        Font protokollJahr1LabelFont = this.$$$getFont$$$(null, Font.BOLD, 18, protokollJahrLabel.getFont());
+        if (protokollJahr1LabelFont != null) protokollJahrLabel.setFont(protokollJahr1LabelFont);
+        protokollJahrLabel.setText("Protokoll Jahr 1");
+        ueberschriftPanel.add(protokollJahrLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bearbeitenErstellenLabel = new JLabel();
         bearbeitenErstellenLabel.setText("[ProtokollID]");
         ueberschriftPanel.add(bearbeitenErstellenLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

@@ -40,7 +40,7 @@ public class AuswahlBestehenderAntragstellerController {
 
     private AuswahlBestehenderAntragstellerGui gui = new AuswahlBestehenderAntragstellerGui();
 
-    public AuswahlBestehenderAntragstellerController(){
+    public AuswahlBestehenderAntragstellerController() {
 
         gui.getZurueckButton().addActionListener(new ActionListener() {
             @Override
@@ -53,13 +53,13 @@ public class AuswahlBestehenderAntragstellerController {
         gui.getLoeschenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isRowSelected(gui.getAntragstellerTable())) {
+                if (isRowSelected(gui.getAntragstellerTable())) {
                     personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
                     PersonDto personDto = personService.readPersonFromId(personId);
-                    if(personDto.getProtokolle().size() == 0){
+                    if (personDto.getProtokolle().size() == 0) {
                         personService.removePerson(personId);
-                    } else{
-                        if(showDeleteOptionPane()){
+                    } else {
+                        if (showDeleteOptionPane()) {
                             personService.removePersonMitProtokolle(personId);
                         }
                     }
@@ -71,16 +71,11 @@ public class AuswahlBestehenderAntragstellerController {
         gui.getBearbeitenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isRowSelected(gui.getAntragstellerTable())) {
+                if (isRowSelected(gui.getAntragstellerTable())) {
                     personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
-                    PersonDto personDto = personService.readPersonFromId(personId);
-                    if(personDto.getAktualisierungsjahr() < getAktuellesJahr()){
-                        new MessageDialog(gui.getAuswahlBestehenderAntragstellerPanel(), "Die Daten des Antragstellers sind nicht aktuell. " +
-                                "Der Antragsteller muss erst bearbeitet werden um fortzufahren.");
-                    }else {
-                        myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
-                        antragstellerController.drawGui(myFrame, personId);
-                    }
+
+                    myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
+                    antragstellerController.drawGui(myFrame, personId);
                 }
             }
         });
@@ -88,16 +83,22 @@ public class AuswahlBestehenderAntragstellerController {
         gui.getAuswaehlenButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(isRowSelected(gui.getAntragstellerTable())) {
+                if (isRowSelected(gui.getAntragstellerTable())) {
                     personId = getIdFromRowSelection(tableModel, gui.getAntragstellerTable());
-                    myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
-                    startseiteProtokolleCotroller.drawGui(myFrame, personId);
+                    PersonDto personDto = personService.readPersonFromId(personId);
+                    if (personDto.getAktualisierungsjahr() < getAktuellesJahr()) {
+                        new MessageDialog(gui.getAuswahlBestehenderAntragstellerPanel(), "Die Daten des Antragstellers sind nicht aktuell. " +
+                                "Der Antragsteller muss erst bearbeitet werden um fortzufahren.");
+                    } else {
+                        myFrame.remove(gui.getAuswahlBestehenderAntragstellerPanel());
+                        startseiteProtokolleCotroller.drawGui(myFrame, personId);
+                    }
                 }
             }
         });
     }
 
-    public void drawGui(JFrame frame){
+    public void drawGui(JFrame frame) {
         frame.add(gui.getAuswahlBestehenderAntragstellerPanel());
         fillTable();
         frame.pack();
@@ -105,7 +106,7 @@ public class AuswahlBestehenderAntragstellerController {
         this.myFrame = frame;
     }
 
-    private void fillTable(){
+    private void fillTable() {
 
         tableModel = new DefaultTableModel();
 
@@ -117,7 +118,7 @@ public class AuswahlBestehenderAntragstellerController {
 
         List<PersonDto> personList = personService.readAllPersons();
 
-        for (PersonDto personDto: personList) {
+        for (PersonDto personDto : personList) {
             Object[] rowInput = new Object[]{personDto.getId(), personDto.getNachname(), personDto.getVorname(),
                     personDto.getGeschlecht(), personDto.getStandort(), personDto.getProtokolle().size()};
             tableModel.addRow(rowInput);
@@ -126,7 +127,7 @@ public class AuswahlBestehenderAntragstellerController {
         gui.getAntragstellerTable().setModel(tableModel);
     }
 
-    private boolean showDeleteOptionPane(){
+    private boolean showDeleteOptionPane() {
         int result = JOptionPane.showConfirmDialog((Component) null, deleteMessage,
                 "Achtung!", JOptionPane.OK_CANCEL_OPTION);
         return result == JOptionPane.OK_OPTION;

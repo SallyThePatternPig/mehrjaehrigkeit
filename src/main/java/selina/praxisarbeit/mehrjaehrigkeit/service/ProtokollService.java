@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import static selina.praxisarbeit.mehrjaehrigkeit.common.CommonUtil.getAktuellesJahr;
@@ -47,9 +48,12 @@ public class ProtokollService {
             protokollEntity = entityManager.find(ProtokollEntity.class, protokollDto.getId());
         }
         new ConverterProtokoll().convertToEntity(protokollDto, protokollEntity);
-        Integer keineSchutzmittelJahr = getKeineSchutzmittelBeantragungsJahr(protokollDto.isKeinePflanzenschutzmittel(), personEntity.getId());
-        Integer min100QmGruenflaecheJahr = getMin100QmBeantragungsJahr(protokollDto.isMin100qmGruenflaeche(), personEntity.getId());
-        Integer feldhamsterJahr = getFeldhamsterBeantragungsjahr(protokollDto.isFeldhamster(), personEntity.getId());
+        Integer keineSchutzmittelJahr = getKeineSchutzmittelBeantragungsJahr(protokollDto.isKeinePflanzenschutzmittel(), personEntity.getId(),
+                protokollDto.getErfassungsjahr());
+        Integer min100QmGruenflaecheJahr = getMin100QmBeantragungsJahr(protokollDto.isMin100qmGruenflaeche(), personEntity.getId(),
+                protokollDto.getErfassungsjahr());
+        Integer feldhamsterJahr = getFeldhamsterBeantragungsjahr(protokollDto.isFeldhamster(), personEntity.getId(),
+                protokollDto.getErfassungsjahr());
         protokollEntity.setKeinePflanzenschutzmittel(convertToAumEnum(keineSchutzmittelJahr));
         protokollEntity.setMin100qmGruenflaeche(convertToAumEnum(min100QmGruenflaecheJahr));
         protokollEntity.setFeldhamster(convertToAumEnum(feldhamsterJahr));
@@ -61,12 +65,13 @@ public class ProtokollService {
         ProtokollEntity protokollEntity = entityManager.find(ProtokollEntity.class, protokollId);
         Long personId = protokollEntity.getAntragsteller().getId();
         ProtokollDto protokollDto = new ConverterProtokoll().convertToDto(protokollEntity);
+        protokollDto.setVorjahresGesamtflaeche(getVorjahresGesamtflaeche(protokollDto.getErfassungsjahr(), personId));
         protokollDto.setKeinePflanzenschutzmittel(aumEnumToboolean(protokollEntity.getKeinePflanzenschutzmittel()));
-        protokollDto.setKeinePflanzenschutzmittelAbJahr(getKeineSchutzmittelBeantragungsJahr(protokollDto.isKeinePflanzenschutzmittel(), personId));
+        protokollDto.setKeinePflanzenschutzmittelAbJahr(getKeineSchutzmittelBeantragungsJahr(protokollDto.isKeinePflanzenschutzmittel(), personId, protokollDto.getErfassungsjahr()));
         protokollDto.setMin100qmGruenflaeche(aumEnumToboolean(protokollEntity.getMin100qmGruenflaeche()));
-        protokollDto.setMin100qmGruenflaecheAbJahr(getMin100QmBeantragungsJahr(protokollDto.isMin100qmGruenflaeche(), personId));
+        protokollDto.setMin100qmGruenflaecheAbJahr(getMin100QmBeantragungsJahr(protokollDto.isMin100qmGruenflaeche(), personId, protokollDto.getErfassungsjahr()));
         protokollDto.setFeldhamster(aumEnumToboolean(protokollEntity.getFeldhamster()));
-        protokollDto.setFeldhamsterAbJahr(getFeldhamsterBeantragungsjahr(protokollDto.isFeldhamster(), personId));
+        protokollDto.setFeldhamsterAbJahr(getFeldhamsterBeantragungsjahr(protokollDto.isFeldhamster(), personId, protokollDto.getErfassungsjahr()));
         return protokollDto;
     }
 
@@ -75,19 +80,14 @@ public class ProtokollService {
         protokollDto.setPersonId(personId);
         protokollDto.setTierAnzahl(defaultZahl);
         protokollDto.setErfassungsjahr(getAktuellesJahr());
-        Integer beantragungsJahrKeineSchutzmittel = getKeineSchutzmittelBeantragungsJahr(false, personId);
-        Integer beantragungsJahrMin100QM = getMin100QmBeantragungsJahr(false, personId);
-        Integer beantragungsJahrFeldhamster = getFeldhamsterBeantragungsjahr(false, personId);
+        protokollDto.setVorjahresGesamtflaeche(getVorjahresGesamtflaeche(protokollDto.getErfassungsjahr(), personId));
+        Integer beantragungsJahrKeineSchutzmittel = getKeineSchutzmittelBeantragungsJahr(false, personId, protokollDto.getErfassungsjahr());
+        Integer beantragungsJahrMin100QM = getMin100QmBeantragungsJahr(false, personId, protokollDto.getErfassungsjahr());
+        Integer beantragungsJahrFeldhamster = getFeldhamsterBeantragungsjahr(false, personId, protokollDto.getErfassungsjahr());
+        protokollDto.setKeinePflanzenschutzmittelAbJahr(beantragungsJahrKeineSchutzmittel);
+        protokollDto.setMin100qmGruenflaecheAbJahr(beantragungsJahrMin100QM);
+        protokollDto.setFeldhamsterAbJahr(beantragungsJahrFeldhamster);
 
-        if(beantragungsJahrKeineSchutzmittel != null) {
-            protokollDto.setKeinePflanzenschutzmittelAbJahr(beantragungsJahrKeineSchutzmittel);
-        }
-        if( beantragungsJahrMin100QM != null) {
-            protokollDto.setMin100qmGruenflaecheAbJahr(getMin100QmBeantragungsJahr(false, personId));
-        }
-        if( beantragungsJahrFeldhamster != null) {
-            protokollDto.setFeldhamsterAbJahr(beantragungsJahrFeldhamster);
-        }
         return protokollDto;
     }
 
@@ -138,11 +138,11 @@ public class ProtokollService {
         throw new IllegalArgumentException(beantragungsjahr.toString());
     }
 
-    private Integer getMin100QmBeantragungsJahr(boolean checkboxWert, Long personId) {
+    private Integer getMin100QmBeantragungsJahr(boolean checkboxWert, Long personId, int erfassungsjahr) {
         if (checkboxWert) {
-            return getAktuellesJahr();
+            return erfassungsjahr;
         } else {
-            for (int i = getAktuellesJahr(); i > getAktuellesJahr() - aumGueltigkeit; i--) {
+            for (int i = erfassungsjahr; i > erfassungsjahr - aumGueltigkeit; i--) {
                 //TODO: Ergebnis der Datenbankabfrage in einer Klasse zwischenspeichern
                 ProtokollEntity protokollEntity = loadVorjahresProtokoll(i, personId);
                 if(protokollEntity == null){
@@ -158,11 +158,11 @@ public class ProtokollService {
         }
     }
 
-    private Integer getKeineSchutzmittelBeantragungsJahr(boolean checkboxWert, Long personId){
+    private Integer getKeineSchutzmittelBeantragungsJahr(boolean checkboxWert, Long personId, int erfassungsjahr){
         if(checkboxWert){
-            return getAktuellesJahr();
+            return erfassungsjahr;
         }else{
-            for(int i = getAktuellesJahr(); i > getAktuellesJahr()-aumGueltigkeit; i--){
+            for(int i = erfassungsjahr; i > erfassungsjahr-aumGueltigkeit; i--){
                 ProtokollEntity protokollEntity = loadVorjahresProtokoll(i, personId);
                 if(protokollEntity == null){
                     return null;
@@ -177,11 +177,11 @@ public class ProtokollService {
         }
     }
 
-    private Integer getFeldhamsterBeantragungsjahr(boolean checkboxWert, Long personId){
+    private Integer getFeldhamsterBeantragungsjahr(boolean checkboxWert, Long personId, int erfassungsjahr){
         if(checkboxWert){
-            return getAktuellesJahr();
+            return erfassungsjahr;
         }else{
-            for(int i = getAktuellesJahr(); i > getAktuellesJahr()-aumGueltigkeit; i--){
+            for(int i = erfassungsjahr; i > erfassungsjahr-aumGueltigkeit; i--){
                 ProtokollEntity protokollEntity = loadVorjahresProtokoll(i, personId);
                 if(protokollEntity == null){
                     return null;
@@ -194,6 +194,14 @@ public class ProtokollService {
             }
             return null;
         }
+    }
+
+    private BigDecimal getVorjahresGesamtflaeche(int aktuellesJahr, Long personId) {
+        ProtokollEntity protokollEntity = loadVorjahresProtokoll(aktuellesJahr, personId);
+        if(protokollEntity != null) {
+            return protokollEntity.getGesamtflaeche();
+        }
+        return null;
     }
 
     private ProtokollEntity loadVorjahresProtokoll(int akutellesJahr, Long personId){
